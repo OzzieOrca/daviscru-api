@@ -1,3 +1,4 @@
+/** Angular CSS **/
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak],
 .ng-cloak, .x-ng-cloak,
 .ng-hide {
@@ -7,6 +8,14 @@ ng\:form {
     display: block;
 }
 
+/*Remove spinner on number input*/
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/** Generic CSS **/
 body{
     background-color: #444444;
     font-family: 'Source Sans Pro', sans-serif;
@@ -27,11 +36,11 @@ a:hover, a:focus{
 }
 @font-face {
     font-family: 'freightsans_prolight';
-    src: url('fonts/freigsanprolig-webfont.eot');
-    src: url('fonts/freigsanprolig-webfont.eot?#iefix') format('embedded-opentype'),
-    url('fonts/freigsanprolig-webfont.woff') format('woff'),
-    url('fonts/freigsanprolig-webfont.ttf') format('truetype'),
-    url('fonts/freigsanprolig-webfont.svg#freightsans_prolight') format('svg');
+    src: url('../fonts/freigsanprolig-webfont.eot');
+    src: url('../fonts/freigsanprolig-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/freigsanprolig-webfont.woff') format('woff'),
+    url('../fonts/freigsanprolig-webfont.ttf') format('truetype'),
+    url('../fonts/freigsanprolig-webfont.svg#freightsans_prolight') format('svg');
     font-weight: normal;
     font-style: normal;
 }

@@ -1,23 +1,58 @@
 <!DOCTYPE html>
 <html ng-app>
 <head>
-	<title></title>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-	<style>
-		[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-			display: none !important;
-		}
-
-		/*Remove spinner on number input*/
-		input[type=number]::-webkit-inner-spin-button,
-		input[type=number]::-webkit-outer-spin-button {
-			-webkit-appearance: none;
-			margin: 0;
-		}
-	</style>
+	<title>Cru at UC Davis | PageName</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="css/bootstrap.min.css" rel="stylesheet"  media="screen">
+	<link href="css/carousel.css" rel="stylesheet"  media="screen">
+	<link href="css/style.css" rel="stylesheet"  media="screen">
+	<!-- TODO: Insert Google Analyctics Code -->
 </head>
 <body>
-	<ng-view></ng-view>
+	<div class="body-container">
+		<div class="colored-bars colored-bars-thin">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-3 colored-bar colored-bar-left"></div>
+					<div class="col-xs-3 colored-bar colored-bar-left-middle"></div>
+					<div class="col-xs-3 colored-bar colored-bar-right-middle"></div>
+					<div class="col-xs-3 colored-bar colored-bar-right"></div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-6">
+					<a href="#/home"><img class="logo" src="images/cru-ucdavis-logo.png" alt="Cru at UC Davis" /></a>
+				</div>
+				<div class="col-xs-6 text-right hidden-xs logo-tagline">
+					Give. Grow. Go.
+				</div>
+			</div>
+		</div>
+		<main-menu></main-menu>
+		<ng-view></ng-view>
+	</div>
+	<div class="colored-bars colored-bars">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-3 colored-bar colored-bar-left"></div>
+				<div class="col-xs-3 colored-bar colored-bar-left-middle"></div>
+				<div class="col-xs-3 colored-bar colored-bar-right-middle"></div>
+				<div class="col-xs-3 colored-bar colored-bar-right"></div>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<a href="http://www.cru.org" target="_blank">Cru.org</a> &middot; Copyright &copy 2014 Cru at UC Davis
+				</div>
+			</div>
+		</div>
+	</footer>
+
 	<script src="packages/shadow_dom/shadow_dom.min.js"></script>
 	<script type="application/dart" src="main.dart"></script>
 	<script type="text/javascript" src="packages/browser/dart.js"></script>
