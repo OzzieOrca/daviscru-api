@@ -1,0 +1,8 @@
+name: daviscru
+dependencies:
+  browser: any
+  angular: any
+  shadow_dom: any
+  route_hierarchical: any
+transformers:
+- angular

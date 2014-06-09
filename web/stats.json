@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Initiations",
+        "value": 10
+    },
+    {
+        "name": "Spiritual Conversations",
+        "value": 9
+    },
+    {
+        "name": "Gospel Presentations",
+        "value": 8
+    },
+    {
+        "name": "Received Christ",
+        "value": 7
+    },
+    {
+        "name": "Holy Spirit Presentations",
+        "value": 6
+    },
+    {
+        "name": "Media",
+        "value": 5
+    },
+    {
+        "name": "Follow Up",
+        "value": 4
+    },
+    {
+        "name": "Group Gospel Presentations",
+        "value": 3
+    },
+    {
+        "name": "Group Holy Spirit Presentations",
+        "value": 2
+    }
+]

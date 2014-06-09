@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<style>
+		[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+			display: none !important;
+		}
+
+		/*Remove spinner on number input*/
+		input[type=number]::-webkit-inner-spin-button,
+		input[type=number]::-webkit-outer-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<ng-view></ng-view>
+	<script src="packages/shadow_dom/shadow_dom.min.js"></script>
+	<script type="application/dart" src="main.dart"></script>
+	<script type="text/javascript" src="packages/browser/dart.js"></script>
+</body>
+</html>
