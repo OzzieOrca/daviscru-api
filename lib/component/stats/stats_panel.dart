@@ -2,6 +2,8 @@ library stats_panel;
 
 import 'package:angular/angular.dart';
 
+part 'package:daviscru/models/stat.dart';
+
 @Component(
     selector: 'stats-panel',
     templateUrl: 'packages/daviscru/component/stats/stats_panel.html',
@@ -34,25 +36,5 @@ class StatsPanelComponent {
     .catchError((e) {
       loadStatus = "error";
     });
-  }
-}
-
-class Stat {
-  String name;
-  int value;
-  int newRecordValue;
-
-  Stat(this.name, this.value, [this.newRecordValue = 0]);
-
-  Stat.fromJson(Map<String, dynamic> json) : this(json['name'], json['value']);
-
-  void increment(){
-    newRecordValue++;
-  }
-
-  void decrement(){
-    if(newRecordValue > 0){
-      newRecordValue--;
-    }
   }
 }
