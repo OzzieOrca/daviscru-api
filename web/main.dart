@@ -6,9 +6,10 @@ import 'package:angular/routing/module.dart';
 import 'package:logging/logging.dart';
 
 import 'package:daviscru/routing/daviscru_router.dart';
+import 'package:daviscru/component/menu/menu.dart';
 import 'package:daviscru/component/stats/stats_panel.dart';
 
-@MirrorsUsed(targets: const ['stats_panel', 'daviscru_router'], override: '*')
+@MirrorsUsed(targets: const ['daviscru_router', 'stats_panel', 'menu'], override: '*')
 import 'dart:mirrors';
 
 class RoutingModule extends Module {
@@ -19,6 +20,12 @@ class RoutingModule extends Module {
   }
 }
 
+class MenuModule extends Module {
+  MenuModule() {
+    bind(MenuComponent);
+  }
+}
+
 class StatsModule extends Module {
   StatsModule() {
     bind(StatsPanelComponent);
@@ -26,10 +33,11 @@ class StatsModule extends Module {
 }
 
 void main() {
-  Logger.root..level = Level.FINEST
-    ..onRecord.listen((LogRecord r) { print(r.message); });
+  /*Logger.root..level = Level.FINEST
+    ..onRecord.listen((LogRecord r) { print(r.message); });*/
   applicationFactory()
       .addModule(new RoutingModule())
+      .addModule(new MenuModule())
       .addModule(new StatsModule())
       .run();
 }
