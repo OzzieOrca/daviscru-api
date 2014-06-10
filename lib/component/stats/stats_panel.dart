@@ -1,6 +1,7 @@
 library stats_panel;
 
 import 'package:angular/angular.dart';
+part 'package:daviscru/service/stats_repository.dart';
 
 part 'package:daviscru/models/stat.dart';
 
@@ -10,12 +11,15 @@ part 'package:daviscru/models/stat.dart';
     publishAs: 'statsPanel',
     useShadowDom: false)
 class StatsPanelComponent {
-  final Http _http;
+  final StatsRepository _repo;
   List<Stat> stats;
   String loadStatus = "loading";
 
-  StatsPanelComponent(this._http) {
-    stats = _loadData();
+  StatsPanelComponent(this._repo){
+    _repo.getStats().then((returnedStats){
+      stats = returnedStats;
+      loadStatus = "success";
+    }).catchError((_) => loadStatus = "error");
   }
 
   void save(){
@@ -25,16 +29,5 @@ class StatsPanelComponent {
 
   void clear(){
     stats.forEach((stat) => stat.newRecordValue = 0);
-  }
-
-  List<Stat> _loadData() {
-    _http.get('stats.json')
-    .then((HttpResponse response) {
-      stats = response.data.map((d) => new Stat.fromJson(d)).toList();
-      loadStatus = "success";
-    })
-    .catchError((e) {
-      loadStatus = "error";
-    });
   }
 }

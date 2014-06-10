@@ -29,6 +29,7 @@ class MenuModule extends Module {
 class StatsModule extends Module {
   StatsModule() {
     bind(StatsPanelComponent);
+    bind(StatsRepository);
   }
 }
 
