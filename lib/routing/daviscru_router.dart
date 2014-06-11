@@ -12,8 +12,14 @@ void davisCruRouteInitializer(Router router, RouteViewFactory views) {
                   view: 'view/tools/stats.html'),
           }
       ),
-      'page': ngRoute(
+      'home': ngRoute(
           defaultRoute: true,
+          enter: (RouteEnterEvent e) =>
+            router.go('page', {'pageUrl': 'home'},
+              replace: true
+            )
+      ),
+      'page': ngRoute(
           path: '/:pageUrl',
           view: 'view/page.html'
       ),
