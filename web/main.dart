@@ -23,6 +23,7 @@ class RoutingModule extends Module {
 class MenuModule extends Module {
   MenuModule() {
     bind(MenuComponent);
+    bind(MenuRepository);
   }
 }
 

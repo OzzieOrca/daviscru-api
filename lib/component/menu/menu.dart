@@ -1,6 +1,8 @@
 library menu;
 
 import 'package:angular/angular.dart';
+part 'package:daviscru/models/menu_item.dart';
+part 'package:daviscru/service/menu_repository.dart';
 
 @Component(
     selector: 'main-menu',
@@ -8,32 +10,15 @@ import 'package:angular/angular.dart';
     publishAs: 'menu',
     useShadowDom: false)
 class MenuComponent {
-  final Http _http;
+  final MenuRepository _repo;
   List<MenuItem> menuItems;
   String loadStatus = "loading";
 
-  MenuComponent(this._http) {
-    //stats = _loadData();
-  }
-
-  /*List<Stat> _loadData() {
-    _http.get('stats.json')
-    .then((HttpResponse response) {
-      stats = response.data.map((d) => new MenuItem.fromJson(d)).toList();
+  MenuComponent(this._repo) {
+    _repo.getMenuItems().then((returnedMenuItems){
+      menuItems = returnedMenuItems;
       loadStatus = "success";
-    })
-    .catchError((e) {
-      loadStatus = "error";
-    });
-  }*/
-}
-
-class MenuItem {
-  String name;
-  String url;
-
-  MenuItem(this.name, this.url);
-
-  //Stat.fromJson(Map<String, dynamic> json) : this(json['name'], json['value']);
-
+      print(menuItems);
+    }).catchError((_) => loadStatus = "error");
+  }
 }
