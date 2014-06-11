@@ -18,7 +18,6 @@ class MenuComponent {
     _repo.getMenuItems().then((returnedMenuItems){
       menuItems = returnedMenuItems;
       loadStatus = "success";
-      print(menuItems);
     }).catchError((_) => loadStatus = "error");
   }
 }

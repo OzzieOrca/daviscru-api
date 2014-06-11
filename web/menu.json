@@ -12,34 +12,38 @@
                 "url": "weekly-meeting"
             },
             {
-                "category": "Freshmen"
+                "category": "Freshmen",
+                "subPages": [
+                    {
+                        "name": "Segundo",
+                        "url": "segundo"
+                    },
+                    {
+                        "name": "Tercero",
+                        "url": "tercero"
+                    },
+                    {
+                        "name": "Cuarto",
+                        "url": "cuarto"
+                    }
+                ]
             },
             {
-                "name": "Segundo",
-                "url": "segundo"
-            },
-            {
-                "name": "Tercero",
-                "url": "tercero"
-            },
-            {
-                "name": "Cuarto",
-                "url": "cuarto"
-            },
-            {
-                "category": "Interest Specific"
-            },
-            {
-                "name": "Arts and Humanities",
-                "url": "arts-and-humanities"
-            },
-            {
-                "name": "Science and Engineering",
-                "url": "science-and-engineering"
-            },
-            {
-                "name": "Transfer",
-                "url": "transfer"
+                "category": "Interest Specific",
+                "subPages": [
+                    {
+                        "name": "Arts and Humanities",
+                        "url": "arts-and-humanities"
+                    },
+                    {
+                        "name": "Science and Engineering",
+                        "url": "science-and-engineering"
+                    },
+                    {
+                        "name": "Transfer",
+                        "url": "transfer"
+                    }
+                ]
             }
         ]
     },
