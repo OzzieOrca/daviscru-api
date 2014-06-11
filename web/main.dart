@@ -7,6 +7,7 @@ import 'package:logging/logging.dart';
 
 import 'package:daviscru/routing/daviscru_router.dart';
 import 'package:daviscru/component/menu/menu.dart';
+import 'package:daviscru/component/page/page.dart';
 import 'package:daviscru/component/stats/stats_panel.dart';
 
 @MirrorsUsed(targets: const ['daviscru_router', 'stats_panel', 'menu'], override: '*')
@@ -27,6 +28,12 @@ class MenuModule extends Module {
   }
 }
 
+class PageModule extends Module {
+  PageModule() {
+    bind(PageComponent);
+  }
+}
+
 class StatsModule extends Module {
   StatsModule() {
     bind(StatsPanelComponent);
@@ -40,6 +47,7 @@ void main() {
   applicationFactory()
       .addModule(new RoutingModule())
       .addModule(new MenuModule())
+      .addModule(new PageModule())
       .addModule(new StatsModule())
       .run();
 }
