@@ -1,0 +1,12 @@
+{
+    "title": "Home",
+    "url": "home",
+    "parent": "",
+    "widgets": [
+        {
+            "widgetType": "text",
+            "bodyText": "First Widget!!!"
+        }
+
+    ]
+}

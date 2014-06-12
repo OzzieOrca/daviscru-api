@@ -31,6 +31,7 @@ class MenuModule extends Module {
 class PageModule extends Module {
   PageModule() {
     bind(PageComponent);
+    bind(PageRepository);
   }
 }
 
