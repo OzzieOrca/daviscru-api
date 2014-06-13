@@ -197,6 +197,10 @@ h1 .small, h2 .small{
     color: #999;
 }
 
+.admin-toolbar-wrapper{
+    background-color: #444444;
+    border-bottom: 2px solid #282828;
+}
 .admin-toolbar{
      margin-top: 5px;
 }
