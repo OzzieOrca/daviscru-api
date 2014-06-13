@@ -33,11 +33,10 @@ class Page {
   }
 
   void resetWidget(Widget currentWidget){
-    int index = _findWidgetIndex(currentWidget);
-    widgets[index] = new Widget(widgets[index].widgetType);
+    widgets[index] = new Widget(currentWidget.widgetType);
   }
 
   void deleteWidget(Widget currentWidget){
-    widgets.removeAt(_findWidgetIndex(currentWidget));
+    widgets.remove(currentWidget);
   }
 }
