@@ -20,7 +20,7 @@ void davisCruRouteInitializer(Router router, RouteViewFactory views) {
             )
       ),
       'page': ngRoute(
-          path: '/:pageUrl',
+          path: '/:pageUrl*',
           viewHtml: '<page></page>'
       ),
   });

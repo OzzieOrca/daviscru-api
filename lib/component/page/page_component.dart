@@ -18,7 +18,7 @@ class PageComponent {
   String url;
 
   PageComponent(this._repo, RouteProvider routeProvider){
-    url = routeProvider.parameters['pageUrl'];
+    url = routeProvider.parameters['pageUrl*'];
     _repo.getPage().then((returnedPage){
       page = returnedPage;
       loadStatus = "success";
