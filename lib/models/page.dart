@@ -10,8 +10,12 @@ class Page {
 
   Page.fromJson(Map<String, dynamic> json) : this(json['title'], json['url'], json['parent'], json['widgets'].map((d) => new Widget.fromJson(d)).toList());
 
+  int _findWidgetIndex(Widget currentWidget){
+    return widgets.indexOf(currentWidget);
+  }
+
   void moveWidgetUp(Widget currentWidget){
-    int index = widgets.indexOf(currentWidget);
+    int index = _findWidgetIndex(currentWidget);
     if(index > 0 && index < widgets.length){
       Widget temp = widgets[index];
       widgets[index] = widgets[index - 1];
@@ -20,11 +24,20 @@ class Page {
   }
 
   void moveWidgetDown(Widget currentWidget){
-    int index = widgets.indexOf(currentWidget);
+    int index = _findWidgetIndex(currentWidget);
     if(index < widgets.length - 1){
       Widget temp = widgets[index];
       widgets[index] = widgets[index + 1];
       widgets[index + 1] = temp;
     }
+  }
+
+  void resetWidget(Widget currentWidget){
+    int index = _findWidgetIndex(currentWidget);
+    widgets[index] = new Widget(widgets[index].widgetType);
+  }
+
+  void deleteWidget(Widget currentWidget){
+    widgets.removeAt(_findWidgetIndex(currentWidget));
   }
 }
