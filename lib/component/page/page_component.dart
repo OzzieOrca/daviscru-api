@@ -9,7 +9,7 @@ part 'package:daviscru/models/widget.dart';
 @Component(
     selector: 'page',
     templateUrl: 'packages/daviscru/component/page/page.html',
-    publishAs: 'pageComponent',
+    publishAs: 'pgComp',
     useShadowDom: false)
 class PageComponent {
   final PageRepository _repo;
