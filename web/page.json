@@ -4,9 +4,48 @@
     "parent": "",
     "widgets": [
         {
+            "widgetType": "jumbotron",
+            "headingText": "Jumbotrons",
+            "subHeadingText": "are cool!",
+            "bodyText": "This is big."
+        },
+        {
+            "widgetType": "pageheader",
+            "headingText": "Page",
+            "subHeadingText": "header"
+        },
+        {
+            "widgetType": "well",
+            "bodyText": "I'm in a well!"
+        },
+        {
+            "widgetType": "featurette",
+            "headingText": "Heading",
+            "subHeadingText": "Subheading",
+            "bodyText": "Body Text.",
+            "alignment": "left",
+            "hasDivider": true,
+            "imageUrl": "http://placehold.it/500x500/FFD34E/000000"
+        },
+        {
+            "widgetType": "featurette",
+            "headingText": "Heading",
+            "subHeadingText": "Subheading",
+            "bodyText": "Body Text.",
+            "alignment": "right",
+            "imageUrl": "http://placehold.it/500x500/DD7D1B/000000"
+        },
+        {
             "widgetType": "text",
             "bodyText": "First Widget!!!"
+        },
+        {
+            "widgetType": "html",
+            "bodyText": "<strong>Bold Text</strong>"
+        },
+        {
+            "widgetType": "youtube",
+            "videoUrl": "2R_u1XPdJWA"
         }
-
     ]
 }

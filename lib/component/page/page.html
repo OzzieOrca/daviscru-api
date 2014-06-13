@@ -9,12 +9,59 @@
 					<div class="col-md-12">
 						<div class="btn-group pull-right widget-actions">
 							<button type="button" class="btn btn-xs btn-default" disabled="disabled">{{ widget.widgetType }}</button>
-							<button type="button" class="btn btn-xs btn-primary" data-id="{{ loop.index0 }}" data-action="moveup"><span class="glyphicon glyphicon-arrow-up"></span></button>
-							<button type="button" class="btn btn-xs btn-primary" data-id="{{ loop.index0 }}" data-action="movedown"><span class="glyphicon glyphicon-arrow-down"></span></button>
-							<button type="button" class="btn btn-xs btn-warning" data-id="{{ loop.index0 }}" data-action="reset"><span class="glyphicon glyphicon-refresh"></span> Reset</button>
-							<button type="button" class="btn btn-xs btn-danger" data-id="{{ loop.index0 }}" data-action="delete"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+							<button type="button" class="btn btn-xs btn-info" ng-click="widget.swapAlignment()"  ng-if="widget.widgetType == 'featurette'"><span class="glyphicon glyphicon-transfer"></span></button>
+							<button type="button" class="btn btn-xs btn-info" ng-click="widget.toggleDivider()"><span class="glyphicon" ng-class="{'glyphicon-check': widget.hasDivider, 'glyphicon-unchecked': !widget.hasDivider}"></span> Divider</button>
+							<button type="button" class="btn btn-xs btn-primary" data-action="moveup"><span class="glyphicon glyphicon-arrow-up"></span></button>
+							<button type="button" class="btn btn-xs btn-primary" data-action="movedown"><span class="glyphicon glyphicon-arrow-down"></span></button>
+							<button type="button" class="btn btn-xs btn-warning" data-action="reset"><span class="glyphicon glyphicon-refresh"></span> Reset</button>
+							<button type="button" class="btn btn-xs btn-danger" data-action="delete"><span class="glyphicon glyphicon-trash"></span> Delete</button>
 						</div>
-						<div>{{widget.bodyText}}</div>
+						<hr class="featurette-divider" ng-if="widget.hasDivider">
+						<div ng-switch="widget.widgetType">
+							<div class="jumbotron" ng-switch-when="jumbotron">
+								<div class="container">
+									<h1>
+										<span>{{ widget.headingText }}</span>
+										<span class="small">{{ widget.subHeadingText  }}</span>
+									</h1>
+									<p>{{ widget.bodyText  }}</p>
+								</div>
+							</div>
+							<div class="page-header" ng-switch-when="pageheader">
+								<h1>
+									<span>{{ widget.headingText }}</span>
+									<small>{{ widget.subHeadingText }}</small>
+								</h1>
+							</div>
+							<div class="well" ng-switch-when="well">
+								<div>{{ widget.bodyText }}</div>
+							</div>
+							<div class="container marketing" ng-switch-when="featurette">
+								<div class="row featurette" ng-switch="widget.alignment">
+									<template id="widget_featurette_image.html" type="text/ng-template">
+										<div class="col-md-5">
+											<img class="featurette-image img-responsive" src="{{ widget.imageUrl }}">
+										</div>
+									</template>
+									<div ng-include="widget_featurette_image.html" ng-switch-when="left"></div>
+									<div class="col-md-7">
+										<h2 class="featurette-heading">
+											<span>{{ widget.headingText }}</span>
+											<span class="small">{{ widget.subHeadingText }}</span>
+										</h2>
+										<div>{{ widget.bodyText }}</div>
+									</div>
+									<div ng-include="widget_featurette_image.html" ng-switch-when="right"></div>
+								</div>
+							</div>
+							<div ng-switch-when="text">
+								{{widget.bodyText}}
+							</div>
+							<div ng-switch-when="html" ng-bind-html="widget.bodyText"></div>
+							<div class="flex-video" ng-switch-when="youtube">
+								<iframe src="//www.youtube.com/embed/{{ widget.videoUrl }}" frameborder="0" allowfullscreen></iframe>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
