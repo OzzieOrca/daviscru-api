@@ -11,8 +11,8 @@
 							<button type="button" class="btn btn-xs btn-default" disabled="disabled">{{ widget.widgetType }}</button>
 							<button type="button" class="btn btn-xs btn-info" ng-click="widget.swapAlignment()"  ng-if="widget.widgetType == 'featurette'"><span class="glyphicon glyphicon-transfer"></span></button>
 							<button type="button" class="btn btn-xs btn-info" ng-click="widget.toggleDivider()"><span class="glyphicon" ng-class="{'glyphicon-check': widget.hasDivider, 'glyphicon-unchecked': !widget.hasDivider}"></span> Divider</button>
-							<button type="button" class="btn btn-xs btn-primary" data-action="moveup"><span class="glyphicon glyphicon-arrow-up"></span></button>
-							<button type="button" class="btn btn-xs btn-primary" data-action="movedown"><span class="glyphicon glyphicon-arrow-down"></span></button>
+							<button type="button" class="btn btn-xs btn-primary" ng-click="pageComponent.page.moveWidgetUp(widget)"><span class="glyphicon glyphicon-arrow-up"></span></button>
+							<button type="button" class="btn btn-xs btn-primary" ng-click="pageComponent.page.moveWidgetDown(widget)" data-action="movedown"><span class="glyphicon glyphicon-arrow-down"></span></button>
 							<button type="button" class="btn btn-xs btn-warning" data-action="reset"><span class="glyphicon glyphicon-refresh"></span> Reset</button>
 							<button type="button" class="btn btn-xs btn-danger" data-action="delete"><span class="glyphicon glyphicon-trash"></span> Delete</button>
 						</div>
