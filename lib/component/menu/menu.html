@@ -16,22 +16,19 @@
 						<li ng-class="{'dropdown': menuItem.hasSubPages, 'active': menu.isActive(menuItem.url)}" ng-repeat="menuItem in menu.menuItems">
 							<a href="#/{{menuItem.url}}" ng-class="{'dropdown-toggle': menuItem.hasSubPages}" ng-attr-data-toggle="{{menuItem.hasSubPages ? 'dropdown' : ''}}">{{menuItem.name}} <b ng-class="{'caret': menuItem.hasSubPages}"></b></a>
 							<ul class="dropdown-menu" ng-if="menuItem.hasSubPages">
-								<!--<li class="divider" ng-hide="$first"></li>-->
-								<li ng-class="{'dropdown-header': subMenuItem.isCategory}" ng-repeat="subMenuItem in menuItem.subMenuItems" ng-switch="subMenuItem.isCategory">
-									<a href="#/{{menuItem.url + '/' + subMenuItem.url}}" ng-switch-when="false">{{subMenuItem.name}}</a>
-									<span ng-switch-when="true">{{subMenuItem.name}}</span>
-								</li>
+								<template id="menu_sub_menu_item.html" type="text/ng-template">
+									<li class="divider" ng-if="!$first && subMenuItem.isCategory"></li>
+									<li ng-class="{'dropdown-header': subMenuItem.isCategory}" ng-switch="subMenuItem.isCategory">
+										<a href="#/{{menuItem.url + '/' + subMenuItem.url}}" ng-switch-when="false">{{subMenuItem.name}}</a>
+										<span ng-switch-when="true">{{subMenuItem.name}}</span>
+									</li>
+									<li ng-if="subMenuItem.hasSubPages" ng-repeat="subSubMenuItem in subMenuItem.subMenuItems">
+										<a href="#/{{menuItem.url + '/' + subMenuItem.url + '/' + subSubMenuItem.url}}">{{subSubMenuItem.name}}</a>
+									</li>
+								</template>
+								<li ng-include="menu_sub_menu_item.html" ng-repeat="subMenuItem in menuItem.subMenuItems"></li>
 							</ul>
 						</li>
-
-						<!--<li ng-switch-when="true" class="dropdown" ng-class="{'active': false}">
-							<a href="#/{{menuItem.url}}" class="dropdown-toggle" data-toggle="dropdown">{{menuItem.name}} <b class="caret"></b></a>
-							<ul class="dropdown-menu" ng-repeat="subMenuItem in menuItem.subMenuItems" ng-switch="subMenuItem.isCategory">
-								<li class="divider" ng-switch-when="true" ng-hide="$first"></li>
-								<li class="dropdown-header" ng-switch-when="true">{{subMenuItem.name}}</li>
-								<li ng-switch-when="false"><a href="#/{{menuItem.url + '/' + subMenuItem.url}}">{{subMenuItem.name}}</a></li>
-							</ul>
-						</li>-->
 					</ul>
 					<ul class="nav navbar-nav navbar-right" ng-switch="true"><!-- switch on user logged in-->
 						<li class="dropdown nav-image-borderless" ng-switch-when="true">
