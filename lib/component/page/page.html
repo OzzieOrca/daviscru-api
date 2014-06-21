@@ -9,26 +9,24 @@
 							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-plus"></span> Add Widget <span class="caret"></span></button>
 							<ul class="dropdown-menu" role="menu">
 								<li class="dropdown-header">Large Components</li>
-								<li><a href="#" data-add-widget="pageheader">Page Header</a></li>
-								<li><a href="#" data-add-widget="jumbotron">Jumbotron</a></li>
-								<li><a href="#" data-add-widget="carousel">Carousel</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget($event, 'pageheader')">Page Header</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget($event, 'jumbotron')">Jumbotron</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget($event, 'carousel')">Carousel</a></li>
 								<li class="divider"></li>
 								<li class="dropdown-header">Media Display</li>
-								<li><a href="#" data-add-widget="thumbnail">Thumbnail</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget($event, 'thumbnail')">Thumbnail</a></li>
 								<li class="divider"></li>
 								<li class="dropdown-header">Content Pieces</li>
-								<li><a href="#" data-add-widget="well">Well</a></li>
-								<li><a href="#" data-add-widget="3-panel-grid">3 Panel Grid</a></li>
-								<li><a href="#" data-add-widget="featurette-left">Featurette Left</a></li>
-								<li><a href="#" data-add-widget="featurette-right">Featurette Right</a></li>
-								<li><a href="#" data-add-widget="divider">Divider</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget($event, 'well')">Well</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget($event, '3-panel-grid')">3 Panel Grid</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget($event, 'featurette')">Featurette</a></li>
 								<li class="divider"></li>
 								<li class="dropdown-header">Simple Widgets</li>
-								<li><a href="#" data-add-widget="text">Text</a></li>
-								<li><a href="#" data-add-widget="html">HTML Code</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget($event, 'text')">Text</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget($event, 'html')">HTML Code</a></li>
 								<li class="divider"></li>
 								<li class="dropdown-header">External Resources</li>
-								<li><a href="#" data-add-widget="youtube">YouTube Video</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget($event, 'youtube')">YouTube Video</a></li>
 							</ul>
 						</div>
 					</div>

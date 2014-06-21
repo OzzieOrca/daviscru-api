@@ -41,4 +41,10 @@ class Page {
   void deleteWidget(Widget currentWidget){
     widgets.remove(currentWidget);
   }
+
+  void addWidget(MouseEvent event, String widgetType){
+    event.preventDefault(); // suppress default click action
+    event.stopPropagation();
+    widgets.insert(0, new Widget(widgetType));
+  }
 }
