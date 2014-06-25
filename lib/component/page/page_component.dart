@@ -1,7 +1,7 @@
 library page;
 
 import 'package:angular/angular.dart';
-part 'package:daviscru/service/page_repository.dart';
+part 'package:daviscru/service/repositories/page_repository.dart';
 
 part 'package:daviscru/models/page.dart';
 part 'package:daviscru/models/widget.dart';

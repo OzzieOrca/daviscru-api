@@ -3,7 +3,7 @@ library menu;
 import 'package:angular/angular.dart';
 //import 'package:daviscru/component/page/page_component.dart';
 part 'package:daviscru/models/menu_item.dart';
-part 'package:daviscru/service/menu_repository.dart';
+part 'package:daviscru/service/repositories/menu_repository.dart';
 
 @Component(
     selector: 'main-menu',

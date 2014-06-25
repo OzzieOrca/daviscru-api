@@ -1,7 +1,7 @@
 library stats_panel;
 
 import 'package:angular/angular.dart';
-part 'package:daviscru/service/stats_repository.dart';
+part 'package:daviscru/service/repositories/stats_repository.dart';
 
 part 'package:daviscru/models/stat.dart';
 
