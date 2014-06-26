@@ -15,7 +15,7 @@ void davisCruRouteInitializer(Router router, RouteViewFactory views) {
       'home': ngRoute(
           defaultRoute: true,
           enter: (RouteEnterEvent e) =>
-            router.go('page', {'pageUrl': 'home'},
+            router.go('page', {'pageUrl*': 'home'},
               replace: true
             )
       ),
