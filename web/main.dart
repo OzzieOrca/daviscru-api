@@ -9,6 +9,7 @@ import 'package:daviscru/routing/daviscru_router.dart';
 import 'package:daviscru/component/menu/menu_component.dart';
 import 'package:daviscru/component/page/page_component.dart';
 import 'package:daviscru/component/stats/stats_panel_component.dart';
+import 'package:daviscru/service/authentication.dart';
 
 class RoutingModule extends Module {
   RoutingModule() {
@@ -22,6 +23,7 @@ class MenuModule extends Module {
   MenuModule() {
     bind(MenuComponent);
     bind(MenuRepository);
+    bind(Authentication);
   }
 }
 

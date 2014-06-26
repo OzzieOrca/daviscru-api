@@ -1,5 +1,7 @@
 name: daviscru
 dependencies:
+  google_oauth2_client: '>=0.3.4'
+  google_plus_v1_api: any
   browser: any
   angular: any
   shadow_dom: any
