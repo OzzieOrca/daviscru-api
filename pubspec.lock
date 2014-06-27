@@ -61,6 +61,10 @@ packages:
     description: google_plus_v1_api
     source: hosted
     version: "0.4.14"
+  grinder:
+    description: grinder
+    source: hosted
+    version: "0.5.4"
   html5lib:
     description: html5lib
     source: hosted
@@ -85,6 +89,10 @@ packages:
     description: logging
     source: hosted
     version: "0.9.1+1"
+  mime:
+    description: mime
+    source: hosted
+    version: "0.9.0+3"
   oauth2:
     description: oauth2
     source: hosted
@@ -97,6 +105,14 @@ packages:
     description: perf_api
     source: hosted
     version: "0.0.8"
+  quiver:
+    description: quiver
+    source: hosted
+    version: "0.18.2"
+  redstone:
+    description: redstone
+    source: hosted
+    version: "0.5.3+1"
   route_hierarchical:
     description: route_hierarchical
     source: hosted
@@ -109,6 +125,14 @@ packages:
     description: shadow_dom
     source: hosted
     version: "0.10.0"
+  shelf:
+    description: shelf
+    source: hosted
+    version: "0.5.4+1"
+  shelf_static:
+    description: shelf_static
+    source: hosted
+    version: "0.1.4+6"
   source_maps:
     description: source_maps
     source: hosted
