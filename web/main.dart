@@ -43,7 +43,7 @@ class StatsModule extends Module {
 
 void main() {
   /*Logger.root..level = Level.FINEST
-    ..onRecord.listen((LogRecord r) { print(r.message); });*/
+    ..onRecord.listen((LogRecord r) => print(r.message));*/
   applicationFactory()
       .addModule(new RoutingModule())
       .addModule(new MenuModule())

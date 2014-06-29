@@ -32,7 +32,7 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right" ng-switch="menu.auth.loaded && menu.auth.hasRole('user')"><!-- switch on user logged in-->
 						<li class="dropdown nav-image-borderless" ng-switch-when="true">
-							<a href="#" class="dropdown-toggle account-dropdown" data-toggle="dropdown"><img src="{{menu.auth.profilePicture}}" /> {{menu.auth.firstName}} {{menu.auth.lastName}} <b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle account-dropdown" data-toggle="dropdown"><img ng-src="{{menu.auth.profilePicture}}" /> {{menu.auth.firstName}} {{menu.auth.lastName}} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<!-- if is_granted('ROLE_SUPER_ADMIN') %} -->
 								<li class="dropdown-header">Admin</li>
@@ -47,11 +47,11 @@
 								<li class="divider"></li>
 								<!-- {% endif %} -->
 								<li class="dropdown-header">Account</li>
-								<li><a href="#" ng-click="menu.auth.logout()"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
+								<li><a href="#" ng-click="menu.auth.logout($event)"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
 							</ul>
 						</li>
 						<li ng-switch-when="false" class="nav-image no-hover">
-							<a href="#" ng-click="menu.auth.login()">
+							<a href="#" ng-click="menu.auth.login($event)">
 								<img src="images/google_signin_base.png"
 								     width="123"
 								     height="42"

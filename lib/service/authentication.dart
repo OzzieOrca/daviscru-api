@@ -19,8 +19,14 @@ class Authentication {
         tokenLoaded: oauthReady);
   }
 
-  void login() => _auth.login();
-  void logout(){
+  void login(MouseEvent event){
+    event.preventDefault(); // suppress default click action
+    event.stopPropagation();
+    _auth.login();
+  }
+  void logout(MouseEvent event){
+    event.preventDefault(); // suppress default click action
+    event.stopPropagation();
     loaded = false;
     role = "anonymous";
     _auth.logout();
@@ -32,8 +38,6 @@ class Authentication {
     email = token.email;
     role = "user";
     var plus = new plusclient.Plus(_auth);
-    // set the API key
-    plus.key = "hbxNZqr2g5RqKYgReasTFMCA";
     plus.oauth_token = _auth.token.data;
     plus.people.get("me").then((person) {
       firstName = person.name.givenName;

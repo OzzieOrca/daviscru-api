@@ -1,12 +1,18 @@
 name: daviscru
+version: 0.0.1
 dependencies:
   redstone: any
   shelf_static: any
-  google_oauth2_client: '>=0.3.4'
+  google_oauth2_client: any
   google_plus_v1_api: any
   browser: any
   angular: any
   shadow_dom: any
   route_hierarchical: any
+dependency_overrides:
+  google_oauth2_client:
+    git:
+      url: git://github.com/OzzieOrca/dart-google-oauth2-library.git
+      ref: autoLoadStoredToken
 transformers:
 - angular
