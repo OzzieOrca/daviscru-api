@@ -54,12 +54,9 @@ packages:
     source: hosted
     version: "0.9.0"
   google_oauth2_client:
-    description:
-      ref: autoLoadStoredToken
-      resolved-ref: "86bccf2c4f9ecb681b8b27a53ce710c36a6607c1"
-      url: "git://github.com/OzzieOrca/dart-google-oauth2-library.git"
-    source: git
-    version: "0.3.8"
+    description: google_oauth2_client
+    source: hosted
+    version: "0.3.9"
   google_plus_v1_api:
     description: google_plus_v1_api
     source: hosted
@@ -124,10 +121,6 @@ packages:
     description: rsa_pkcs
     source: hosted
     version: "0.1.1"
-  shadow_dom:
-    description: shadow_dom
-    source: hosted
-    version: "0.10.0"
   shelf:
     description: shelf
     source: hosted
