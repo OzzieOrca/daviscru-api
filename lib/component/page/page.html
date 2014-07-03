@@ -114,8 +114,8 @@
 								{{widget.bodyText}}
 							</div>
 							<div ng-switch-when="html" ng-bind-html="widget.bodyText"></div>
-							<div class="flex-video" ng-switch-when="youtube">
-								<iframe src="//www.youtube.com/embed/{{ widget.videoUrl }}" frameborder="0" allowfullscreen></iframe>
+							<div ng-switch-when="youtube" class="embed-responsive embed-responsive-16by9">
+								<iframe class="embed-responsive-item" src="//www.youtube.com/embed/{{ widget.videoUrl }}"></iframe>
 							</div>
 						</div>
 					</div>
