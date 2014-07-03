@@ -30,7 +30,7 @@
 							</ul>
 						</li>
 					</ul>
-					<ul class="nav navbar-nav navbar-right" ng-switch="menu.auth.loaded && menu.auth.hasRole('user')"><!-- switch on user logged in-->
+					<ul class="nav navbar-nav navbar-right" ng-switch="menu.auth.signedIn && menu.auth.hasRole('user')"><!-- switch on user logged in-->
 						<li class="dropdown nav-image-borderless" ng-switch-when="true">
 							<a href="#" class="dropdown-toggle account-dropdown" data-toggle="dropdown"><img ng-src="{{menu.auth.profilePicture}}" /> {{menu.auth.firstName}} {{menu.auth.lastName}} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -50,7 +50,7 @@
 								<li><a href="#" ng-click="menu.auth.logout($event)"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
 							</ul>
 						</li>
-						<li ng-switch-when="false" class="nav-image no-hover">
+						<li ng-switch-when="false" class="nav-image no-hover" ng-show="menu.auth.buttonDataLoaded">
 							<a href="#" ng-click="menu.auth.login($event)">
 								<img src="images/google_signin_base.png"
 								     width="123"

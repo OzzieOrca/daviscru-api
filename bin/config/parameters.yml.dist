@@ -1,0 +1,7 @@
+parameters:
+  secret:                  ThisTokenIsNotSoSecretChangeIt
+  oauth:
+    google:
+      client_id:           XXXXXXXX.apps.googleusercontent.com
+      client_secret:       XXXXXXXX
+      scope:               "email profile"
