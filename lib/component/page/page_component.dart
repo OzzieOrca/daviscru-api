@@ -19,7 +19,7 @@ class PageComponent {
 
   PageComponent(this._repo, RouteProvider routeProvider){
     url = routeProvider.parameters['pageUrl*'];
-    _repo.getPage().then((returnedPage){
+    _repo.getPage(url).then((returnedPage){
       page = returnedPage;
       loadStatus = "success";
     }).catchError((_) => loadStatus = "error");

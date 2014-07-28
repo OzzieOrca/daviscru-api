@@ -1,9 +1,11 @@
 part of page;
 
 class Page {
+  String id;
   String title;
   String url;
   Page parent;
+  int order;
   List<Widget> widgets = new List();
 
   Page(this.title, this.url, this.parent, [this.widgets]);

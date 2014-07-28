@@ -6,9 +6,12 @@ class PageRepository {
 
   PageRepository(this._http);
 
-  Future<List<Page>> getPage(){
-    return _http.get('page.json')
+  Future<List<Page>> getPage(String url){
+    return _http.get('api/v1/pages/$url')
     .then((HttpResponse response) {
+      if(response.data.isEmpty){
+        return null;
+      };
       return new Page.fromJson(response.data);
     });
   }

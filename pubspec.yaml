@@ -1,16 +1,17 @@
 name: daviscru
 version: 0.0.1
 dependencies:
-  redstone: ">=0.5.4 <0.6.0"
-  shelf_static: ">=0.1.4+6 <0.2.0"
-  dart_config: ">=0.5.0 <0.6.0"
-  crypto: ">=0.9.0 <0.10.0"
-  http: ">=0.11.1+1 <0.12.0"
+  redstone: any
+  redstone_mapper_mongo: any
+  shelf_static: any
+  dart_config: any
+  http: any
+  crypto: any
 
-  google_oauth2_client: ">=0.3.9 <0.4.0"
-  google_plus_v1_api: ">=0.4.14 <0.5.0"
-  browser: ">=0.10.0+2 <0.11.0"
-  angular: ">=0.12.0 <0.13.0"
-  route_hierarchical: ">=0.4.21 <0.5.0"
+  google_oauth2_client: any
+  google_plus_v1_api: any
+  browser: any
+  angular: any
+  route_hierarchical: any
 transformers:
 - angular
