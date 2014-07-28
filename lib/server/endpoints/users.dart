@@ -10,11 +10,11 @@ class Users {
   googleAuthenticateSetupApiRequest(){
     Map response = new Map();
     if(app.request.session["csrf"] == null){
-      app.request.session["csrf"] = generateCSRFToken(app.request.session.id, config["parameters"]["secret"]);
+      app.request.session["csrf"] = generateCSRFToken(app.request.session.id, config["secret"]);
     }
     response["csrf"] = app.request.session["csrf"];
-    response["client_id"] = config["parameters"]["oauth"]["google"]["client_id"];
-    response["scope"] = config["parameters"]["oauth"]["google"]["scope"];
+    response["client_id"] = config["oauth"]["google"]["client_id"];
+    response["scope"] = config["oauth"]["google"]["scope"];
     return response;
   }
 
@@ -35,7 +35,7 @@ class Users {
         if(response["email"] != requestBody["email"]){
           return new shelf.Response(401, body: "Token's email doesn't match given email");
         }
-        if(response["audience"] != config["parameters"]["oauth"]["google"]["client_id"]){
+        if(response["audience"] != config["oauth"]["google"]["client_id"]){
           return new shelf.Response(401, body: "Token's client ID does not match this app's client ID");
         }
         return {"verified": true};
