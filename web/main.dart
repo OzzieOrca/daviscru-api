@@ -14,8 +14,8 @@ import 'package:daviscru/service/authentication.dart';
 class RoutingModule extends Module {
   RoutingModule() {
     bind(RouteInitializerFn, toValue: davisCruRouteInitializer);
-    factory(NgRoutingUsePushState,
-        (_) => new NgRoutingUsePushState.value(false));
+    bind(NgRoutingUsePushState,
+        toFactory: (_) => new NgRoutingUsePushState.value(false));
   }
 }
 
