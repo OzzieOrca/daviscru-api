@@ -17,6 +17,7 @@ import 'package:crypto/crypto.dart';
 
 part "package:daviscru/server/utils.dart";
 part "package:daviscru/server/endpoints/pages.dart";
+part "package:daviscru/server/endpoints/menu.dart";
 part "package:daviscru/server/endpoints/users.dart";
 part "package:daviscru/server/endpoints/tools/stats.dart";
 
