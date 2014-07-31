@@ -13,9 +13,10 @@ import 'package:daviscru/service/authentication.dart';
 
 class RoutingModule extends Module {
   RoutingModule() {
+    //Binding.printInjectWarning = false;   // needed for Angular 0.13.0 and https://github.com/angular/angular.dart/issues/1272
+
     bind(RouteInitializerFn, toValue: davisCruRouteInitializer);
-    bind(NgRoutingUsePushState,
-        toFactory: (_) => new NgRoutingUsePushState.value(false));
+    bind(NgRoutingUsePushState, toValue: new NgRoutingUsePushState.value(false));
   }
 }
 
