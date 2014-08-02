@@ -9,7 +9,7 @@ RUN apt-get install -y software-properties-common python-software-properties
 RUN apt-get install -y nginx
 RUN apt-add-repository ppa:hachre/dart
 RUN apt-get update
-RUN apt-get install dartsdk
+RUN apt-get install -y dartsdk
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
