@@ -36,7 +36,7 @@ void main() {
       app.addPlugin(getMapperPlugin(dbManager));
 
       app.setupConsoleLog();
-      app.start(port: 80);
+      app.start();
     },
     onError: (error) => print(error));
 }
