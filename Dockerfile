@@ -26,6 +26,8 @@ RUN pub build
 
 EXPOSE 80
 
+WORKDIR /var/www/daviscru/bin
+
 CMD dart bin/server.dart && nginx
 
 #docker run -d -p 80:80 ozzieorca/daviscru
