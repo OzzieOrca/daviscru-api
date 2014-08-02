@@ -4,7 +4,7 @@ MAINTAINER Scotty Waggoner <ozzieorca@gmail.com>
 RUN echo "deb http://archive.ubuntu.com/ubuntu/ precise universe" >> /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get install -y curl wget vim
-#RUN apt-get install -y software-properties-common python-software-properties
+RUN apt-get install -y software-properties-common python-software-properties
 
 RUN apt-get install -y nginx
 RUN apt-add-repository ppa:hachre/dart
