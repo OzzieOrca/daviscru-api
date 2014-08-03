@@ -24,9 +24,9 @@ WORKDIR /var/www/daviscru
 RUN pub get
 RUN pub build
 
-EXPOSE 80
-
 WORKDIR /var/www/daviscru/bin
+
+EXPOSE 80
 
 CMD dart bin/server.dart && nginx
 

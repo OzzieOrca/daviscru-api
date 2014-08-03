@@ -19,4 +19,5 @@ dependency_overrides:
       url: git://github.com/dgresham/route.dart.git
       ref: route-with-slashes
 transformers:
-- angular
+- angular:
+    dart_sdk: "/opt/google/dartsdk"
