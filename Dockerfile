@@ -23,6 +23,6 @@ WORKDIR /var/www/daviscru/bin
 
 EXPOSE 80
 
-CMD dart bin/server.dart && nginx
+CMD nginx && dart server.dart
 
 #docker run -d -p 80:80 ozzieorca/daviscru
