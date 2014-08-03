@@ -19,11 +19,6 @@ RUN ln -s /etc/nginx/sites-available/daviscru.conf /etc/nginx/sites-enabled/davi
 
 ADD . /var/www/daviscru
 
-WORKDIR /var/www/daviscru
-
-RUN pub get
-RUN pub build
-
 WORKDIR /var/www/daviscru/bin
 
 EXPOSE 80
