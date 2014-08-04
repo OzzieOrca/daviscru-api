@@ -1,8 +1,8 @@
 library menu;
 
 import 'package:angular/angular.dart';
+import 'package:path/path.dart' as path;
 import 'package:daviscru/service/authentication.dart';
-//import 'package:daviscru/component/page/page_component.dart';
 
 part 'package:daviscru/models/menu_item.dart';
 part 'package:daviscru/service/repositories/menu_repository.dart';
@@ -15,19 +15,25 @@ part 'package:daviscru/service/repositories/menu_repository.dart';
 class MenuComponent {
   final MenuRepository _repo;
   final Authentication auth;
-  //final PageComponent _pageComponent;
   List<MenuItem> menuItems;
   String loadStatus = "loading";
+  String currentUrl;
 
-  MenuComponent(this._repo, this.auth/*, this._pageComponent*/) {
-    //print("Current route: ${_pageComponent.url}");
-    _repo.getMenuItems().then((returnedMenuItems){
+  MenuComponent(this._repo, this.auth, Router router) {
+    router.onRouteStart.listen((RouteStartEvent event) {
+      event.completed.then((_) {
+        if (router.activePath.length > 0) {
+          currentUrl = router.activePath[0].parameters['pageUrl*'];
+        } else {
+          currentUrl = null;
+        }
+      });
+    });
+
+      _repo.getMenuItems().then((returnedMenuItems){
       menuItems = returnedMenuItems;
       loadStatus = "success";
     }).catchError((_) => loadStatus = "error");
   }
-  bool isActive(String menuItemUrl){
-    /*print("Current route: ${routeProvider.parameters['pageUrl']} menuItemUrl: $menuItemUrl");
-    return routeProvider.parameters['pageUrl'] == menuItemUrl;*/
-  }
+  bool isActive(String menuItemUrl) => path.split(currentUrl)[0] == menuItemUrl;
 }

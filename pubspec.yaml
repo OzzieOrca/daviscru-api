@@ -11,8 +11,9 @@ dependencies:
   google_oauth2_client: any
   google_plus_v1_api: any
   browser: any
-  angular: any
+  angular: ">= 0.13.0"
   route_hierarchical: any
+  path: any
 dependency_overrides:
   route_hierarchical:
     git:
