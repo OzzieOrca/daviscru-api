@@ -20,7 +20,7 @@ RUN ln -s /etc/nginx/sites-available/daviscru.conf /etc/nginx/sites-enabled/davi
 ADD . /var/www/daviscru
 
 WORKDIR /var/www/daviscru
-pub get
+RUN pub get
 
 WORKDIR /var/www/daviscru/bin
 
