@@ -29,8 +29,8 @@ void main() {
     (Map loadedConfig) {
       config = loadedConfig;
       app.setShelfHandler(createStaticHandler("../web",
-      defaultDocument: "index.html",
-      serveFilesOutsidePath: true));
+        defaultDocument: "index.html",
+        serveFilesOutsidePath: true));
 
       var dbManager = new MongoDbManager(config["database"]["mongodb"]["uri"], poolSize: 5);
       app.addPlugin(getMapperPlugin(dbManager));
