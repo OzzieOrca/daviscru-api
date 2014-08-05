@@ -3,7 +3,7 @@ MAINTAINER Scotty Waggoner <ozzieorca@gmail.com>
 
 RUN echo "deb http://archive.ubuntu.com/ubuntu/ precise universe" >> /etc/apt/sources.list
 RUN apt-get update
-RUN apt-get install -y curl wget vim git
+RUN apt-get install -y curl wget tree vim nano git
 RUN apt-get install -y software-properties-common python-software-properties
 
 RUN apt-get install -y supervisor
@@ -34,6 +34,8 @@ EXPOSE 80
 
 CMD /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
 
-#docker run --volumes-from data -d -p 80:80 ozzieorca/daviscru
-#docker run --volumes-from data -i -t -p 80:80 ozzieorca/daviscru /bin/bash
-#Data-only container: docker run -v /data --name data busybox echo Data-only container
+#Run server:                    docker run --volumes-from data -d -p 80:80 ozzieorca/daviscru
+#Run terminal inside server:    docker run --volumes-from data -i -t -p 80:80 ozzieorca/daviscru /bin/bash
+#Create data-only container:    docker run -v /data --name data busybox echo Data-only container
+#Backup:                        docker run --volumes-from data -v $(pwd)/backups:/backup busybox tar cvf /backup/daviscru/daviscru-backup.tar /data
+#Restore:                       docker run --volumes-from data -v $(pwd)/backups:/backup busybox tar xvf /backup/daviscru/daviscru-backup.tar
