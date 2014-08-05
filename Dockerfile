@@ -34,6 +34,6 @@ EXPOSE 80
 
 CMD /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
 
-#docker run -d -p 80:80 ozzieorca/daviscru
-#docker stop $(docker ps -a -q);  docker rm $(docker ps -a -q); docker run -d -p 80:80 ozzieorca/daviscru
-#docker stop $(docker ps -a -q);  docker rm $(docker ps -a -q); docker run -d -i -t -p 80:80 ozzieorca/daviscru /bin/bash; docker attach $(docker ps -q)
+#docker run --volumes-from data -d -p 80:80 ozzieorca/daviscru
+#docker run --volumes-from data -i -t -p 80:80 ozzieorca/daviscru /bin/bash
+#Data-only container: docker run -v /data --name data busybox echo Data-only container

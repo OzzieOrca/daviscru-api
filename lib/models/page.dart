@@ -23,7 +23,6 @@ class Page {
       widgets[index] = widgets[index - 1];
       widgets[index - 1] = currentWidget;
     }
-    widgets = widgets.toList(); //fixes issue with the ng-repeat not updating and displaying widgets in wrong places
   }
 
   void moveWidgetDown(Widget currentWidget){
@@ -32,7 +31,6 @@ class Page {
       widgets[index] = widgets[index + 1];
       widgets[index + 1] = currentWidget;
     }
-    widgets = widgets.toList(); //fixes issue with the ng-repeat not updating and displaying widgets in wrong places
   }
 
   void resetWidget(Widget currentWidget){
