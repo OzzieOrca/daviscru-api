@@ -19,16 +19,9 @@ RUN rm /etc/nginx/sites-enabled/default
 ADD bin/config/nginx-daviscru.conf /etc/nginx/sites-available/nginx-daviscru.conf
 RUN ln -s /etc/nginx/sites-available/nginx-daviscru.conf /etc/nginx/sites-enabled/nginx-daviscru.conf
 
-WORKDIR /var/www/daviscru
-ADD pubspec.yaml /var/www/daviscru/
-ADD pubspec.lock /var/www/daviscru/
-ADD lib /var/www/daviscru/lib
-RUN pub get
-ADD bin /var/www/daviscru/bin
-ADD web /var/www/daviscru/web
 ADD build /var/www/daviscru/build
 
-WORKDIR /var/www/daviscru/bin
+WORKDIR /var/www/daviscru/build/bin
 
 EXPOSE 80
 
