@@ -20,7 +20,7 @@ class Authentication {
   bool signedIn = false;
 
   Authentication(this._http) {
-    _http.get('api/v1/users/authenticate/google/setup-api-request')
+    _http.get('/api/v1/users/authenticate/google/setup-api-request')
       .then((HttpResponse response) {
         clientId = response.data["client_id"];
         scope = response.data["scope"];
@@ -53,7 +53,7 @@ class Authentication {
     dataToVerify["access_token"] = token.data;
     dataToVerify["user_id"] = token.userId;
     dataToVerify["email"] = token.email;
-    _http.post('api/v1/users/authenticate/google/verify', JSON.encode(dataToVerify))
+    _http.post('/api/v1/users/authenticate/google/verify', JSON.encode(dataToVerify))
       .then((HttpResponse response) {
         if(response.data["verified"] == true){
           email = token.email;

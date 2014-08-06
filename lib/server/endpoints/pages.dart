@@ -7,9 +7,14 @@ class PagesEndpoint {
     return dbConn.collection("pages").find().toList();
   }
 
-  @app.Route("/:url")
+  @app.Route("/:url", matchSubPaths: true)
   pageData(@app.Attr() MongoDb dbConn, String url){
     return dbConn.collection("pages").findOne({'url': url});
+  }
+
+  @app.Route("/:url/:secondLevelUrl")
+  pageDataWithSecondLevel(@app.Attr() MongoDb dbConn, String url, String secondLevelUrl){
+    return dbConn.collection("pages").findOne({'url': url + '/' + secondLevelUrl});
   }
 
   @app.DefaultRoute(methods: const [app.POST])
