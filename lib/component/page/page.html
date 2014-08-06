@@ -9,24 +9,24 @@
 							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-plus"></span> Add Widget <span class="caret"></span></button>
 							<ul class="dropdown-menu" role="menu">
 								<li class="dropdown-header">Large Components</li>
-								<li><a href="#" ng-click="pgComp.page.addWidget($event, 'pageheader')">Page Header</a></li>
-								<li><a href="#" ng-click="pgComp.page.addWidget($event, 'jumbotron')">Jumbotron</a></li>
-								<li><a href="#" ng-click="pgComp.page.addWidget($event, 'carousel')">Carousel</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget('pageheader')">Page Header</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget('jumbotron')">Jumbotron</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget('carousel')">Carousel</a></li>
 								<li class="divider"></li>
 								<li class="dropdown-header">Media Display</li>
-								<li><a href="#" ng-click="pgComp.page.addWidget($event, 'thumbnail')">Thumbnail</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget('thumbnail')">Thumbnail</a></li>
 								<li class="divider"></li>
 								<li class="dropdown-header">Content Pieces</li>
-								<li><a href="#" ng-click="pgComp.page.addWidget($event, 'well')">Well</a></li>
-								<li><a href="#" ng-click="pgComp.page.addWidget($event, '3-panel-grid')">3 Panel Grid</a></li>
-								<li><a href="#" ng-click="pgComp.page.addWidget($event, 'featurette')">Featurette</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget('well')">Well</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget('3-panel-grid')">3 Panel Grid</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget('featurette')">Featurette</a></li>
 								<li class="divider"></li>
 								<li class="dropdown-header">Simple Widgets</li>
-								<li><a href="#" ng-click="pgComp.page.addWidget($event, 'text')">Text</a></li>
-								<li><a href="#" ng-click="pgComp.page.addWidget($event, 'html')">HTML Code</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget('text')">Text</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget('html')">HTML Code</a></li>
 								<li class="divider"></li>
 								<li class="dropdown-header">External Resources</li>
-								<li><a href="#" ng-click="pgComp.page.addWidget($event, 'youtube')">YouTube Video</a></li>
+								<li><a href="#" ng-click="pgComp.page.addWidget('youtube')">YouTube Video</a></li>
 							</ul>
 						</div>
 					</div>
@@ -71,6 +71,12 @@
 						</div>
 						<hr class="featurette-divider" ng-if="widget.hasDivider">
 						<div ng-switch="widget.widgetType">
+							<div class="page-header" ng-switch-when="pageheader">
+								<h1>
+									<span>{{ widget.headingText }}</span>
+									<small>{{ widget.subHeadingText }}</small>
+								</h1>
+							</div>
 							<div class="jumbotron" ng-switch-when="jumbotron">
 								<div class="container">
 									<h1>
@@ -80,20 +86,48 @@
 									<p>{{ widget.bodyText  }}</p>
 								</div>
 							</div>
-							<div class="page-header" ng-switch-when="pageheader">
-								<h1>
-									<span>{{ widget.headingText }}</span>
-									<small>{{ widget.subHeadingText }}</small>
-								</h1>
+							<div id="carousel-{{ $parent.$index }}" class="carousel slide hidden-xs" data-ride="carousel" ng-switch-when="carousel">
+								<!-- Indicators -->
+								<ol class="carousel-indicators">
+									<li data-target="#carousel-{{ $parent.$index }}" data-slide-to="{{ $index }}" ng-class="{'active': $first}"  ng-repeat="panel in widget.panelContent"></li>
+								</ol>
+
+								<!-- Wrapper for slides -->
+								<div class="carousel-inner">
+									<div class="item" ng-class="{'active': $first}" ng-repeat="panel in widget.panelContent">
+										<img src="{{ panel.image }}">
+										<div class="carousel-caption">
+											<h2>{{ panel.headingText }}</h2>
+											<p>{{ panel.bodyText }}</p>
+										</div>
+									</div>
+								</div>
+
+								<!-- Controls -->
+								<a class="left carousel-control" href="#carousel-{{ $parent.$index }}" data-slide="prev">
+									<span class="icon-prev"></span>
+								</a>
+								<a class="right carousel-control" href="#carousel-{{ $parent.$index }}" data-slide="next">
+									<span class="icon-next"></span>
+								</a>
 							</div>
 							<div class="well" ng-switch-when="well">
 								<div>{{ widget.bodyText }}</div>
+							</div>
+							<div class="container marketing" ng-switch-when="grid">
+								<div class="row">
+									<div class="col-sm-{{12 ~/ widget.panelContent.length}}" ng-repeat="panel in widget.panelContent">
+										<img class="img-circle" src="{{ panel.image }}">
+										<h2>{{ panel.headingText }}</h2>
+										<div>{{ panel.bodyText }}</div>
+									</div>
+								</div>
 							</div>
 							<div class="container marketing" ng-switch-when="featurette">
 								<div class="row featurette" ng-switch="widget.alignment">
 									<template id="widget_featurette_image.html" type="text/ng-template">
 										<div class="col-md-5">
-											<img class="featurette-image img-responsive" src="{{ widget.imageUrl }}">
+											<img class="featurette-image img-responsive" src="{{ widget.images[0] }}">
 										</div>
 									</template>
 									<div ng-include="widget_featurette_image.html" ng-switch-when="left"></div>

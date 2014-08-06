@@ -35,14 +35,10 @@ class Authentication {
       });
   }
 
-  void login(MouseEvent event){
-    event.preventDefault(); // suppress default click action
-    event.stopPropagation();
+  void login(){
     _auth.login();
   }
-  void logout(MouseEvent event){
-    event.preventDefault(); // suppress default click action
-    event.stopPropagation();
+  void logout(){
     signedIn = false;
     role = "anonymous";
     _auth.logout();

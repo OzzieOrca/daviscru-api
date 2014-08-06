@@ -7,8 +7,8 @@ class Widget {
   String bodyText = "Paragraph Text";
   String alignment = "left";
   bool hasDivider = false;
-  String imageUrl = "http://placehold.it/500x500/FFD34E/000000";
-  String imageAlt;
+  List images = new List();
+  List panelContent = new List<Map>();
   String videoUrl = "https://youtube.com/watch?v=2R_u1XPdJWA";
 
   Widget(this.widgetType);
@@ -20,8 +20,8 @@ class Widget {
     bodyText = json['bodyText'];
     alignment = json['alignment'];
     hasDivider = json['hasDivider'];
-    imageUrl = json['imageUrl'];
-    imageAlt = json['imageAlt'];
+    images = json['images'];
+    panelContent = json['panelContent'];
     videoUrl = json['videoUrl'];
   }
 
