@@ -54,102 +54,114 @@
 		</div>
 	</div>
 </div>
-<div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="container">
-				<div class="row" ng-repeat="widget in pgComp.page.widgets">
-					<div class="col-md-12">
-						<div class="btn-group pull-right widget-actions">
-							<button type="button" class="btn btn-xs btn-default" disabled="disabled">{{ widget.widgetType }}</button>
+<div ng-repeat="widget in pgComp.page.widgets">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="btn-group pull-right widget-actions">
+					<button type="button" class="btn btn-xs btn-default" disabled="disabled">{{ widget.widgetType }}</button>
 							<button type="button" class="btn btn-xs btn-info" ng-click="widget.swapAlignment()"  ng-if="widget.widgetType == 'featurette'"><span class="glyphicon glyphicon-transfer"></span></button>
 							<button type="button" class="btn btn-xs btn-info" ng-click="widget.toggleDivider()"><span class="glyphicon" ng-class="{'glyphicon-check': widget.hasDivider, 'glyphicon-unchecked': !widget.hasDivider}"></span> Divider</button>
 							<button type="button" class="btn btn-xs btn-primary" ng-click="pgComp.page.moveWidgetUp(widget)" ng-disabled="pgComp.page.isFirstWidget(widget)"><span class="glyphicon glyphicon-arrow-up"></span></button>
 							<button type="button" class="btn btn-xs btn-primary" ng-click="pgComp.page.moveWidgetDown(widget)" ng-disabled="pgComp.page.isLastWidget(widget)"><span class="glyphicon glyphicon-arrow-down"></span></button>
 							<button type="button" class="btn btn-xs btn-warning" ng-click="pgComp.page.resetWidget(widget)"><span class="glyphicon glyphicon-refresh"></span> Reset</button>
-							<button type="button" class="btn btn-xs btn-danger" ng-click="pgComp.page.deleteWidget(widget)"><span class="glyphicon glyphicon-trash"></span> Delete</button>
-						</div>
-						<hr class="featurette-divider" ng-if="widget.hasDivider">
-						<div ng-switch="widget.widgetType">
-							<div class="page-header" ng-switch-when="pageheader">
-								<h1>
-									<span>{{ widget.headingText }}</span>
-									<small>{{ widget.subHeadingText }}</small>
-								</h1>
-							</div>
-							<div class="jumbotron" ng-switch-when="jumbotron">
-								<div class="container">
-									<h1>
-										<span>{{ widget.headingText }}</span>
-										<span class="small">{{ widget.subHeadingText  }}</span>
-									</h1>
-									<p>{{ widget.bodyText  }}</p>
-								</div>
-							</div>
-							<div id="carousel-{{ $parent.$index }}" class="carousel slide hidden-xs" data-ride="carousel" ng-switch-when="carousel">
-								<!-- Indicators -->
-								<ol class="carousel-indicators">
-									<li data-target="#carousel-{{ $parent.$index }}" data-slide-to="{{ $index }}" ng-class="{'active': $first}"  ng-repeat="panel in widget.panelContent"></li>
-								</ol>
+					<button type="button" class="btn btn-xs btn-danger" ng-click="pgComp.page.deleteWidget(widget)"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+				</div>
+				<hr class="featurette-divider" ng-if="widget.hasDivider">
+			</div>
+		</div>
+	</div>
+	<div ng-class="{'container': widget.widgetType != 'carousel'}">
+		<div ng-class="{'row': widget.widgetType != 'carousel'}" ng-switch="widget.widgetType">
+			<div class="col-md-12" ng-switch-when="pageheader">
+				<div class="page-header">
+					<h1>
+						<span>{{ widget.headingText }}</span>
+						<small>{{ widget.subHeadingText }}</small>
+					</h1>
+				</div>
+			</div>
+			<div class="col-md-12" ng-switch-when="jumbotron">
+				<div class="jumbotron">
+					<div class="container">
+						<h1>
+							<span>{{ widget.headingText }}</span>
+							<span class="small">{{ widget.subHeadingText  }}</span>
+						</h1>
+						<p>{{ widget.bodyText  }}</p>
+					</div>
+				</div>
+			</div>
+			<div id="carousel-{{ $parent.$index }}" class="carousel slide hidden-xs" data-ride="carousel" ng-switch-when="carousel">
+				<!-- Indicators -->
+				<ol class="carousel-indicators">
+					<li data-target="#carousel-{{ $parent.$index }}" data-slide-to="{{ $index }}" ng-class="{'active': $first}"  ng-repeat="panel in widget.panelContent"></li>
+				</ol>
 
-								<!-- Wrapper for slides -->
-								<div class="carousel-inner">
-									<div class="item" ng-class="{'active': $first}" ng-repeat="panel in widget.panelContent">
-										<img src="{{ panel.image }}">
-										<div class="carousel-caption">
-											<h2>{{ panel.headingText }}</h2>
-											<p>{{ panel.bodyText }}</p>
-										</div>
-									</div>
-								</div>
-
-								<!-- Controls -->
-								<a class="left carousel-control" href="#carousel-{{ $parent.$index }}" data-slide="prev">
-									<span class="icon-prev"></span>
-								</a>
-								<a class="right carousel-control" href="#carousel-{{ $parent.$index }}" data-slide="next">
-									<span class="icon-next"></span>
-								</a>
-							</div>
-							<div class="well" ng-switch-when="well">
-								<div>{{ widget.bodyText }}</div>
-							</div>
-							<div class="container marketing" ng-switch-when="grid">
-								<div class="row">
-									<div class="col-sm-{{12 ~/ widget.panelContent.length}}" ng-repeat="panel in widget.panelContent">
-										<img class="img-circle" src="{{ panel.image }}">
-										<h2>{{ panel.headingText }}</h2>
-										<div>{{ panel.bodyText }}</div>
-									</div>
-								</div>
-							</div>
-							<div class="container marketing" ng-switch-when="featurette">
-								<div class="row featurette" ng-switch="widget.alignment">
-									<template id="widget_featurette_image.html" type="text/ng-template">
-										<div class="col-md-5">
-											<img class="featurette-image img-responsive" src="{{ widget.images[0] }}">
-										</div>
-									</template>
-									<div ng-include="widget_featurette_image.html" ng-switch-when="left"></div>
-									<div class="col-md-7">
-										<h2 class="featurette-heading">
-											<span>{{ widget.headingText }}</span>
-											<span class="small">{{ widget.subHeadingText }}</span>
-										</h2>
-										<div>{{ widget.bodyText }}</div>
-									</div>
-									<div ng-include="widget_featurette_image.html" ng-switch-when="right"></div>
-								</div>
-							</div>
-							<div ng-switch-when="text">
-								{{widget.bodyText}}
-							</div>
-							<div ng-switch-when="html" ng-bind-html="widget.bodyText"></div>
-							<div ng-switch-when="youtube" class="embed-responsive embed-responsive-16by9">
-								<iframe class="embed-responsive-item" src="//www.youtube.com/embed/{{ widget.videoUrl }}"></iframe>
-							</div>
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner">
+					<div class="item" ng-class="{'active': $first}" ng-repeat="panel in widget.panelContent">
+						<img src="{{ panel.image }}">
+						<div class="carousel-caption">
+							<h2>{{ panel.headingText }}</h2>
+							<p>{{ panel.bodyText }}</p>
 						</div>
 					</div>
+				</div>
+
+				<!-- Controls -->
+				<a class="left carousel-control" href="#carousel-{{ $parent.$index }}" data-slide="prev">
+					<span class="icon-prev"></span>
+				</a>
+				<a class="right carousel-control" href="#carousel-{{ $parent.$index }}" data-slide="next">
+					<span class="icon-next"></span>
+				</a>
+			</div>
+			<div class="col-md-12" ng-switch-when="well">
+				<div class="well">
+					<div>{{ widget.bodyText }}</div>
+				</div>
+			</div>
+			<div class="col-md-12" ng-switch-when="grid">
+				<div class="container marketing">
+					<div class="row">
+						<div class="col-sm-{{12 ~/ widget.panelContent.length}}" ng-repeat="panel in widget.panelContent">
+							<img class="img-circle" src="{{ panel.image }}">
+							<h2>{{ panel.headingText }}</h2>
+							<div>{{ panel.bodyText }}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12" ng-switch-when="featurette">
+				<div class="container marketing">
+					<div class="row featurette" ng-switch="widget.alignment">
+						<template id="widget_featurette_image.html" type="text/ng-template">
+							<div class="col-md-5">
+								<img class="featurette-image img-responsive" src="{{ widget.images[0] }}">
+							</div>
+						</template>
+						<div ng-include="widget_featurette_image.html" ng-switch-when="left"></div>
+						<div class="col-md-7">
+							<h2 class="featurette-heading">
+								<span>{{ widget.headingText }}</span>
+								<span class="small">{{ widget.subHeadingText }}</span>
+							</h2>
+							<div>{{ widget.bodyText }}</div>
+						</div>
+						<div ng-include="widget_featurette_image.html" ng-switch-when="right"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12" ng-switch-when="text">
+				{{widget.bodyText}}
+			</div>
+			<div class="col-md-12" ng-switch-when="html">
+				<div ng-bind-html="widget.bodyText"></div>
+			</div>
+			<div class="col-md-12" ng-switch-when="youtube">
+				<div class="embed-responsive embed-responsive-16by9">
+					<iframe class="embed-responsive-item" src="//www.youtube.com/embed/{{ widget.videoUrl }}"></iframe>
 				</div>
 			</div>
 		</div>
