@@ -1,4 +1,6 @@
-<div class="admin-toolbar-wrapper">
+<div class="whole-page-message" ng-if="pgComp.loadStatus == 'loading'">Loading</div>
+<div class="whole-page-message" ng-if="pgComp.loadStatus == 'error'">Error</div>
+<div class="admin-toolbar-wrapper" ng-if="pgComp.loadStatus == 'success'">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 admin-toolbar">
@@ -147,7 +149,7 @@
 								<span>{{ widget.headingText }}</span>
 								<span class="small">{{ widget.subHeadingText }}</span>
 							</h2>
-							<div>{{ widget.bodyText }}</div>
+							<div class="lead">{{ widget.bodyText }}</div>
 						</div>
 						<div ng-include="widget_featurette_image.html" ng-switch-when="right"></div>
 					</div>

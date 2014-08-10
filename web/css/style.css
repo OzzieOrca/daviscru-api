@@ -247,3 +247,14 @@ h1 .small, h2 .small{
 .stats-form .form-control{
     margin-bottom: 7px;
 }
+
+.whole-page-message{
+    background-color: #A3A3A3;
+    color: transparent;
+    text-shadow: 0px 2px 3px rgba(255,255,255,0.4);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    font-size: 17em;
+    text-align: center;
+}

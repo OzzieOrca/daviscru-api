@@ -16,7 +16,7 @@ class PageRepository {
           return new Page.fromJson(response.data);
         },
         onError: (HttpResponse response) {
-          return null;
+          throw(response);
         }
       );
   }
