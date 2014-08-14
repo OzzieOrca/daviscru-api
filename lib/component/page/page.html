@@ -91,6 +91,7 @@
 							<span class="small">{{ widget.subHeadingText  }}</span>
 						</h1>
 						<p>{{ widget.bodyText  }}</p>
+						<a href="{{ widget.button.uri }}" type="button" class="btn btn-primary" ng-if="widget.hasButton" ng-attr-target="{{ widget.buttonTarget }}">{{ widget.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
 					</div>
 				</div>
 			</div>
@@ -150,6 +151,7 @@
 								<span class="small">{{ widget.subHeadingText }}</span>
 							</h2>
 							<div class="lead">{{ widget.bodyText }}</div>
+							<a href="{{ widget.button.uri }}" type="button" class="btn btn-primary" ng-if="widget.hasButton">{{ widget.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
 						</div>
 						<div ng-include="widget_featurette_image.html" ng-switch-when="right"></div>
 					</div>

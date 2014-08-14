@@ -5,7 +5,8 @@ class Widget {
   String headingText = "Heading";
   String subHeadingText = "Subheading";
   String bodyText = "Paragraph Text";
-  String alignment = "left";
+  Map button = new Map<String, String>();
+  String alignment = "right";
   bool hasDivider = false;
   List images = new List();
   List panelContent = new List<Map>();
@@ -18,7 +19,11 @@ class Widget {
     headingText = json['headingText'];
     subHeadingText = json['subHeadingText'];
     bodyText = json['bodyText'];
+    button = json['button'];
     alignment = json['alignment'];
+    if(alignment == null || alignment.isEmpty){
+      alignment = "right";
+    }
     hasDivider = json['hasDivider'];
     images = json['images'];
     panelContent = json['panelContent'];
@@ -27,4 +32,6 @@ class Widget {
 
   void swapAlignment() => alignment == "left" ? alignment = "right" : alignment = "left";
   void toggleDivider() => hasDivider = !hasDivider;
+  bool get hasButton => button != null && button["uri"] != null && button["label"] != null;
+  String get buttonTarget => button["newWindow"] ? "_blank" : "";
 }
