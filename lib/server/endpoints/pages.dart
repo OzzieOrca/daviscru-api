@@ -24,4 +24,3 @@ class PagesEndpoint {
     return "Created Page";
   }
 }
-

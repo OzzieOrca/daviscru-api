@@ -56,6 +56,12 @@
 		</div>
 	</div>
 </div>
+<template id="dynamic_button.html" type="text/ng-template">
+	<a href="{{ widget.button.uri }}" type="button" class="btn btn-primary" ng-if="widget.button != null" target="{{ widget.button.target }}">{{ widget.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
+</template>
+<template id="dynamic_panel_button.html" type="text/ng-template">
+	<a href="{{ panel.button.uri }}" type="button" class="btn btn-primary" ng-if="panel.button != null" target="{{ panel.button.target }}">{{ panel.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
+</template>
 <div ng-repeat="widget in pgComp.page.widgets">
 	<div class="container">
 		<div class="row">
@@ -75,6 +81,7 @@
 	</div>
 	<div ng-class="{'container': widget.widgetType != 'carousel'}">
 		<div ng-class="{'row': widget.widgetType != 'carousel'}" ng-switch="widget.widgetType">
+			<!-- Page Header -->
 			<div class="col-md-12" ng-switch-when="pageheader">
 				<div class="page-header">
 					<h1>
@@ -83,6 +90,7 @@
 					</h1>
 				</div>
 			</div>
+			<!-- Jumbotron -->
 			<div class="col-md-12" ng-switch-when="jumbotron">
 				<div class="jumbotron">
 					<div class="container">
@@ -91,10 +99,11 @@
 							<span class="small">{{ widget.subHeadingText  }}</span>
 						</h1>
 						<p>{{ widget.bodyText  }}</p>
-						<a href="{{ widget.button.uri }}" type="button" class="btn btn-primary" ng-if="widget.hasButton" ng-attr-target="{{ widget.buttonTarget }}">{{ widget.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
+						<p ng-include="dynamic_button.html"></p>
 					</div>
 				</div>
 			</div>
+			<!-- Carousel -->
 			<div id="carousel-{{ $parent.$index }}" class="carousel slide hidden-xs" data-ride="carousel" ng-switch-when="carousel">
 				<!-- Indicators -->
 				<ol class="carousel-indicators">
@@ -120,11 +129,13 @@
 					<span class="icon-next"></span>
 				</a>
 			</div>
+			<!-- Well -->
 			<div class="col-md-12" ng-switch-when="well">
 				<div class="well">
 					<div>{{ widget.bodyText }}</div>
 				</div>
 			</div>
+			<!-- Grid -->
 			<div class="col-md-12" ng-switch-when="grid">
 				<div class="container marketing">
 					<div class="row">
@@ -136,6 +147,24 @@
 					</div>
 				</div>
 			</div>
+			<!-- Thumbnail -->
+			<div class="col-md-12" ng-switch-when="thumbnail">
+				<div class="container marketing">
+					<div class="row">
+						<div class="col-sm-{{12 ~/ widget.panelContent.length}}" ng-repeat="panel in widget.panelContent">
+							<div class="thumbnail">
+								<img src="{{ panel.image }}">
+								<div class="caption" ng-if="panel.headingText != null || panel.bodyText != null || panel.button != null">
+									<h3 ng-if="panel.headingText != null">{{ panel.headingText }}</h3>
+									<p ng-if="panel.bodyText != null">{{ panel.bodyText }}</p>
+									<p ng-include="dynamic_panel_button.html"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Featurette -->
 			<div class="col-md-12" ng-switch-when="featurette">
 				<div class="container marketing">
 					<div class="row featurette" ng-switch="widget.alignment">
@@ -151,18 +180,21 @@
 								<span class="small">{{ widget.subHeadingText }}</span>
 							</h2>
 							<div class="lead">{{ widget.bodyText }}</div>
-							<a href="{{ widget.button.uri }}" type="button" class="btn btn-primary" ng-if="widget.hasButton">{{ widget.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
+							<div ng-include="dynamic_button.html"></div>
 						</div>
 						<div ng-include="widget_featurette_image.html" ng-switch-when="right"></div>
 					</div>
 				</div>
 			</div>
+			<!-- Text -->
 			<div class="col-md-12" ng-switch-when="text">
 				{{widget.bodyText}}
 			</div>
+			<!-- HTML -->
 			<div class="col-md-12" ng-switch-when="html">
 				<div ng-bind-html="widget.bodyText"></div>
 			</div>
+			<!-- YouTube -->
 			<div class="col-md-12" ng-switch-when="youtube">
 				<div class="embed-responsive embed-responsive-16by9">
 					<iframe class="embed-responsive-item" src="//www.youtube.com/embed/{{ widget.videoUrl }}"></iframe>

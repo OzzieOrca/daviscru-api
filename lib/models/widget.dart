@@ -32,6 +32,4 @@ class Widget {
 
   void swapAlignment() => alignment == "left" ? alignment = "right" : alignment = "left";
   void toggleDivider() => hasDivider = !hasDivider;
-  bool get hasButton => button != null && button["uri"] != null && button["label"] != null;
-  String get buttonTarget => button["newWindow"] ? "_blank" : "";
 }
