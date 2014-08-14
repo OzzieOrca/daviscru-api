@@ -19,13 +19,6 @@ RUN rm /etc/nginx/sites-enabled/default
 ADD bin/config/nginx-daviscru.conf /etc/nginx/sites-available/nginx-daviscru.conf
 RUN ln -s /etc/nginx/sites-available/nginx-daviscru.conf /etc/nginx/sites-enabled/nginx-daviscru.conf
 
-RUN curl -O https://www.loggly.com/install/configure-linux.sh
-RUN bash configure-linux.sh -a ozzieorca -t 3602f4dd-31a6-4d6c-bb3a-510b93005227 -u OzzieOrca
-
-RUN wget -q -O - https://www.loggly.com/install/configure-syslog.py | sudo python - setup --auth 3602f4dd-31a6-4d6c-bb3a-510b93005227 --account ozzieorca
-ADD bin/config/21-nginx-loggly.conf /etc/rsyslog.d/21-nginx-loggly.conf
-RUN service rsyslog restart
-
 ADD build /var/www/daviscru/build
 
 WORKDIR /var/www/daviscru/build/bin
