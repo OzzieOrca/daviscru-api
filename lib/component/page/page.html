@@ -63,10 +63,10 @@
 	<a href="{{ panel.button.uri }}" type="button" class="btn btn-primary" ng-if="panel.button != null" target="{{ panel.button.target }}">{{ panel.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
 </template>
 <div ng-repeat="widget in pgComp.page.widgets">
-	<div class="container" ng-if="pgComp.auth.canEdit">
+	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="btn-group pull-right widget-actions">
+				<div class="btn-group pull-right widget-actions" ng-if="pgComp.auth.canEdit">
 					<button type="button" class="btn btn-xs btn-default" disabled="disabled">{{ widget.widgetType }}</button>
 							<button type="button" class="btn btn-xs btn-info" ng-click="widget.swapAlignment()"  ng-if="widget.widgetType == 'featurette'"><span class="glyphicon glyphicon-transfer"></span></button>
 							<button type="button" class="btn btn-xs btn-info" ng-click="widget.toggleDivider()"><span class="glyphicon" ng-class="{'glyphicon-check': widget.hasDivider, 'glyphicon-unchecked': !widget.hasDivider}"></span> Divider</button>
