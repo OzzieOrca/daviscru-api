@@ -1,6 +1,6 @@
 <div class="whole-page-message" ng-if="pgComp.loadStatus == 'loading'">Loading</div>
 <div class="whole-page-message" ng-if="pgComp.loadStatus == 'error'">Error</div>
-<div class="admin-toolbar-wrapper" ng-if="pgComp.loadStatus == 'success'">
+<div class="admin-toolbar-wrapper" ng-if="pgComp.loadStatus == 'success' && pgComp.auth.canEdit">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 admin-toolbar">
@@ -63,7 +63,7 @@
 	<a href="{{ panel.button.uri }}" type="button" class="btn btn-primary" ng-if="panel.button != null" target="{{ panel.button.target }}">{{ panel.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
 </template>
 <div ng-repeat="widget in pgComp.page.widgets">
-	<div class="container">
+	<div class="container" ng-if="pgComp.auth.canEdit">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="btn-group pull-right widget-actions">

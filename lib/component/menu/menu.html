@@ -25,9 +25,9 @@
 							</ul>
 						</li>
 					</ul>
-					<ul class="nav navbar-nav navbar-right" ng-switch="menu.auth.signedIn && menu.auth.hasRole('user')"><!-- switch on user logged in-->
+					<ul class="nav navbar-nav navbar-right" ng-switch="menu.auth.signedIn"><!-- switch on user logged in-->
 						<li class="dropdown nav-image-borderless" ng-switch-when="true">
-							<a href="#" class="dropdown-toggle account-dropdown" data-toggle="dropdown"><img ng-src="{{menu.auth.profilePicture}}" /> {{menu.auth.firstName}} {{menu.auth.lastName}} <b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle account-dropdown" data-toggle="dropdown"><img ng-src="{{menu.auth.profilePicture}}" /> {{menu.auth.name}} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<!-- if is_granted('ROLE_SUPER_ADMIN') %} -->
 								<li class="dropdown-header">Admin</li>

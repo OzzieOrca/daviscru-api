@@ -1,6 +1,5 @@
 import 'package:angular/angular.dart';
 import "package:google_oauth2_client/google_oauth2_browser.dart";
-import "package:google_plus_v1_api/plus_v1_api_browser.dart" as plusclient;
 import "dart:convert";
 
 @Injectable()
@@ -11,8 +10,7 @@ class Authentication {
   String scope;
   String csrf;
 
-  String firstName;
-  String lastName;
+  String name;
   String email;
   String profilePicture;
   String role = "anonymous";
@@ -35,6 +33,26 @@ class Authentication {
       });
   }
 
+  oauthReady(Token token){
+    //Verify Token
+    Map dataToVerify = new Map();
+    dataToVerify["csrf"] = csrf;
+    dataToVerify["access_token"] = token.data;
+    dataToVerify["user_id"] = token.userId;
+    dataToVerify["email"] = token.email;
+    _http.post('/api/v1/users/authenticate/google/verify', JSON.encode(dataToVerify))
+    .then((HttpResponse response) {
+      Map serverResponse = response.data;
+      if(serverResponse["verified"] == true){
+        email = serverResponse["email"];
+        role = serverResponse["role"];
+        name = serverResponse["name"];
+        profilePicture = serverResponse["picture"];
+        signedIn = true;
+      }
+    }).catchError((e) => print(e));
+  }
+
   void login(){
     _auth.login();
   }
@@ -46,27 +64,5 @@ class Authentication {
 
   bool hasRole(String role) => role == this.role;
 
-  oauthReady(Token token){
-    //Verify Token
-    Map dataToVerify = new Map();
-    dataToVerify["csrf"] = csrf;
-    dataToVerify["access_token"] = token.data;
-    dataToVerify["user_id"] = token.userId;
-    dataToVerify["email"] = token.email;
-    _http.post('/api/v1/users/authenticate/google/verify', JSON.encode(dataToVerify))
-      .then((HttpResponse response) {
-        if(response.data["verified"] == true){
-          email = token.email;
-          role = "user";
-          var plus = new plusclient.Plus(_auth);
-          plus.oauth_token = _auth.token.data;
-          plus.people.get("me").then((person) {
-            firstName = person.name.givenName;
-            lastName = person.name.familyName;
-            profilePicture = person.image.url;
-            signedIn = true;
-          }).catchError((_) => print("Error loading from Google+ API"));
-        }
-      }).catchError((e) => print(e));
-  }
+  bool get canEdit => role == "admin";
 }

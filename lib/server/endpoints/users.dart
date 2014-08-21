@@ -2,6 +2,8 @@ part of server;
 
 @app.Group("$API_PREFIX/users")
 class Users {
+  String accessToken;
+  MongoDb dbConn;
 
   @app.DefaultRoute()
   users() => "Users";
@@ -19,26 +21,50 @@ class Users {
   }
 
   @app.Route("/authenticate/google/verify", methods: const [app.POST])
-  googleAuthenticateVerifyUser(@app.Body(app.JSON) Map requestBody){
+  googleAuthenticateVerifyUser(@app.Attr() MongoDb dbConn, @app.Body(app.JSON) Map requestBody){
+    this.dbConn = dbConn;
     if(requestBody["csrf"] == null || requestBody["csrf"] != app.request.session["csrf"]){
       return new shelf.Response(401, body: "CSRF Token Invalid");
     }
-    return http.get("https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${requestBody["access_token"]}")
-      .then((Response responseJSON){
-        Map response = JSON.decode(responseJSON.body);
-        if(response["error"] != null){
-          return new shelf.Response(400, body: "${response["error"]}: ${response["error_description"]}");
+    accessToken = requestBody["access_token"];
+    return http.get("https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}")
+      .then((Response googleResponseJSON){
+        Map googleResponse = JSON.decode(googleResponseJSON.body);
+        if(googleResponse["error"] != null){
+          return new shelf.Response(400, body: "${googleResponse["error"]}: ${googleResponse["error_description"]}");
         }
-        if(response["user_id"] != requestBody["user_id"]){
+        if(googleResponse["user_id"] != requestBody["user_id"]){
           return new shelf.Response(401, body: "Token's user ID doesn't match given user ID");
         }
-        if(response["email"] != requestBody["email"]){
+        if(googleResponse["email"] != requestBody["email"]){
           return new shelf.Response(401, body: "Token's email doesn't match given email");
         }
-        if(response["audience"] != config["oauth"]["google"]["client_id"]){
+        if(googleResponse["audience"] != config["oauth"]["google"]["client_id"]){
           return new shelf.Response(401, body: "Token's client ID does not match this app's client ID");
         }
-        return {"verified": true};
+        return saveOrUpdateUser(googleResponse["user_id"], googleResponse["email"]).then((user){
+          if(user == null){
+            return {"verified": false};
+          }
+          user["verified"] = true;
+          return user;
+        });
       }).catchError((e) => print(e));
+  }
+
+  saveOrUpdateUser(String userId, String email){
+    return dbConn.collection("users").findOne({'userId': userId}).then((user){
+      if(user == null){
+        return http.get("https://www.googleapis.com/oauth2/v1/userinfo?access_token=${accessToken}")
+          .then((Response googleResponseJSON){
+            Map googleResponse = JSON.decode(googleResponseJSON.body);
+            //if(googleResponse["name"] != null && googleResponse["picture"] != null){
+              return dbConn.insert("users", {"role": "user", "userId": userId, "email": email, "name": googleResponse["name"], "picture": googleResponse["picture"]});
+            //}
+          }).catchError((e) => print(e));
+      }else{
+        return user;
+      }
+    });
   }
 }
