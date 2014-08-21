@@ -23,11 +23,11 @@ class Authentication {
         clientId = response.data["client_id"];
         scope = response.data["scope"];
         csrf = response.data["csrf"];
-        buttonDataLoaded = true;
         _auth = new GoogleOAuth2(
             clientId,
             [scope],
-            tokenLoaded: oauthReady);
+            tokenLoaded: oauthReady,
+            tokenNotLoaded: showLoginButton);
       }).catchError((e) {
         print("Error loading Google+ Signin Button Data");
       });
@@ -48,13 +48,20 @@ class Authentication {
         role = serverResponse["role"];
         name = serverResponse["name"];
         profilePicture = serverResponse["picture"];
+        buttonDataLoaded = true;
         signedIn = true;
       }
-    }).catchError((e) => print(e));
+    }).catchError((e){
+      buttonDataLoaded = true;
+      print(e);
+    });
   }
+  
+  void showLoginButton() => buttonDataLoaded = true;
 
   void login(){
     _auth.login();
+    buttonDataLoaded = false;
   }
   void logout(){
     signedIn = false;
