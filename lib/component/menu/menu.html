@@ -17,9 +17,9 @@
 							<a href="/{{menuItem.url}}" ng-class="{'dropdown-toggle': menuItem.hasSubPages}" ng-attr-data-toggle="{{menuItem.hasSubPages ? 'dropdown' : ''}}">{{menuItem.name}} <b ng-class="{'caret': menuItem.hasSubPages}"></b></a>
 							<ul class="dropdown-menu" ng-if="menuItem.hasSubPages">
 								<li ng-switch="subMenuItem.isCategory" ng-repeat="subMenuItem in menuItem.subMenuItems"><!-- ng-include="menu_sub_menu_item.html"-->
-									<a href="/{{menuItem.url + '/' + subMenuItem.url}}" ng-switch-when="false">{{subMenuItem.name}}</a>
-									<div class="divider" ng-if="!$first" ng-switch="true"></div>
-									<span class="dropdown-header" ng-switch-when="true">{{subMenuItem.name}}</span>
+									<a href="/{{menuItem.url + '/' + subMenuItem.url}}" ng-unless="subMenuItem.isCategory">{{subMenuItem.name}}</a>
+									<div class="divider" ng-if="!$first && subMenuItem.isCategory"></div>
+									<span class="dropdown-header" ng-if="subMenuItem.isCategory">{{subMenuItem.name}}</span>
 									<a href="/{{menuItem.url + '/' + subSubMenuItem.url}}" ng-repeat="subSubMenuItem in subMenuItem.subMenuItems">{{subSubMenuItem.name}}</a>
 								</li>
 							</ul>
