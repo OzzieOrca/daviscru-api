@@ -58,9 +58,8 @@ class Users {
         return http.get("https://www.googleapis.com/oauth2/v1/userinfo?access_token=${accessToken}")
           .then((Response googleResponseJSON){
             Map googleResponse = JSON.decode(googleResponseJSON.body);
-            //if(googleResponse["name"] != null && googleResponse["picture"] != null){
-              return dbConn.insert("users", {"role": "user", "userId": userId, "email": email, "name": googleResponse["name"], "picture": googleResponse["picture"]});
-            //}
+            dbConn.insert("users", {"role": "user", "userId": userId, "email": email, "name": googleResponse["name"], "picture": googleResponse["picture"]});
+            return dbConn.collection("users").findOne({'userId': userId});
           }).catchError((e) => print(e));
       }else{
         return user;
