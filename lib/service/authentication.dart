@@ -73,4 +73,5 @@ class Authentication {
   bool hasRole(String role) => role == this.role;
 
   bool get canEdit => role == "admin";
+  bool get isAdmin => role == "admin";
 }

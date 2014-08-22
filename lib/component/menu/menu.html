@@ -29,18 +29,16 @@
 						<li class="dropdown nav-image-borderless" ng-switch-when="true">
 							<a href="#" class="dropdown-toggle account-dropdown" data-toggle="dropdown"><img ng-src="{{menu.auth.profilePicture}}" /> {{menu.auth.name}} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<!-- if is_granted('ROLE_SUPER_ADMIN') %} -->
-								<li class="dropdown-header">Admin</li>
-								<li><a href="/admin"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-								<li><a href="/admin/pages"><span class="glyphicon glyphicon-list-alt"></span> Pages</a></li>
-								<li><a href="/admin/users"><span class="glyphicon glyphicon-user"></span> Users</a></li>
-								<li class="divider"></li>
-								<!-- {% endif %}
-								{% if is_granted('ROLE_CONTENT_ADMIN') %} -->
-								<li class="dropdown-header">Tools</li>
-								<li><a href="/tools/stats"><span class="glyphicon glyphicon-stats"></span> Ministry Indicators</a></li>
-								<li class="divider"></li>
-								<!-- {% endif %} -->
+								<li ng-if="menu.auth.isAdmin" class="dropdown-header">Admin</li>
+								<li ng-if="menu.auth.isAdmin"><a href="/admin"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+								<li ng-if="menu.auth.isAdmin"><a href="/admin/pages"><span class="glyphicon glyphicon-list-alt"></span> Pages</a></li>
+								<li ng-if="menu.auth.isAdmin"><a href="/admin/users"><span class="glyphicon glyphicon-user"></span> Users</a></li>
+								<li ng-if="menu.auth.isAdmin" class="divider"></li>
+
+								<li ng-if="menu.auth.canEdit" class="dropdown-header">Tools</li>
+								<li ng-if="menu.auth.canEdit"><a href="/tools/stats"><span class="glyphicon glyphicon-stats"></span> Ministry Indicators</a></li>
+								<li ng-if="menu.auth.canEdit" class="divider"></li>
+
 								<li class="dropdown-header">Account</li>
 								<li><a href="#" ng-click="menu.auth.logout()"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
 							</ul>
