@@ -25,11 +25,10 @@ class PageComponent {
     String rawUrl = routeProvider.parameters['pageUrl*'];
     if(rawUrl.endsWith('/')){
       url = rawUrl.substring(0, rawUrl.length - 1);
-      print("modified url: $url");
     }else{
       url = rawUrl;
-      print("url: $url");
     }
+
     _repo.getPage(url).then((returnedPage){
       page = returnedPage;
       global.pageTitle = page.title;
