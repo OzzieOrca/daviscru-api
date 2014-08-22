@@ -22,5 +22,5 @@ class MenuItem {
 
   bool get isCategory => url == null && name != null;
   bool get hasSubPages => subMenuItems != null;
-  String get processedUrl => hasSubPages ? '#' : '/$url';
+  String get processedUrl => hasSubPages ? 'javascript:;' : '/$url';
 }
