@@ -10,7 +10,7 @@ part 'package:daviscru/models/widget.dart';
 
 @Component(
     selector: 'page',
-    templateUrl: 'packages/daviscru/component/page/page.html',
+    templateUrl: '/packages/daviscru/component/page/page.html',
     publishAs: 'pgComp',
     useShadowDom: false)
 class PageComponent {
@@ -22,7 +22,14 @@ class PageComponent {
   String url;
 
   PageComponent(this._repo, this.auth, this.global, RouteProvider routeProvider){
-    url = routeProvider.parameters['pageUrl*'];
+    String rawUrl = routeProvider.parameters['pageUrl*'];
+    if(rawUrl.endsWith('/')){
+      url = rawUrl.substring(0, rawUrl.length - 1);
+      print("modified url: $url");
+    }else{
+      url = rawUrl;
+      print("url: $url");
+    }
     _repo.getPage(url).then((returnedPage){
       page = returnedPage;
       global.pageTitle = page.title;

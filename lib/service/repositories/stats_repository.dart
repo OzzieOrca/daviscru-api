@@ -7,7 +7,7 @@ class StatsRepository {
   StatsRepository(this._http);
 
   Future<List<Stat>> getStats(){
-    return _http.get('stats.json')
+    return _http.get('/stats.json')
       .then((HttpResponse response) {
         return response.data.map((d) => new Stat.fromJson(d)).toList();
       });

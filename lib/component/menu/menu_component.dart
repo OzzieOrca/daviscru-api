@@ -9,7 +9,7 @@ part 'package:daviscru/service/repositories/menu_repository.dart';
 
 @Component(
     selector: 'main-menu',
-    templateUrl: 'packages/daviscru/component/menu/menu.html',
+    templateUrl: '/packages/daviscru/component/menu/menu.html',
     publishAs: 'menu',
     useShadowDom: false)
 class MenuComponent {
@@ -36,5 +36,10 @@ class MenuComponent {
     }).catchError((_) => loadStatus = "error");
   }
 
-  bool isActive(String menuItemUrl) => path.split(currentUrl)[0] == menuItemUrl;
+  bool isActive(String menuItemUrl){
+    if(currentUrl == null){
+      return false;
+    }
+    return path.split(currentUrl)[0] == menuItemUrl;
+  }
 }

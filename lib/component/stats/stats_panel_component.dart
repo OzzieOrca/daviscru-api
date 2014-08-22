@@ -7,7 +7,7 @@ part 'package:daviscru/models/stat.dart';
 
 @Component(
     selector: 'stats-panel',
-    templateUrl: 'packages/daviscru/component/stats/stats_panel.html',
+    templateUrl: '/packages/daviscru/component/stats/stats_panel.html',
     publishAs: 'statsPanel',
     useShadowDom: false)
 class StatsPanelComponent {
