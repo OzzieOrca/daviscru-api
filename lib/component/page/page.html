@@ -1,5 +1,43 @@
-<div class="whole-page-message" ng-if="pgComp.loadStatus == 'loading'">Loading</div>
-<div class="whole-page-message" ng-if="pgComp.loadStatus == 'error'">Error</div>
+<div class="container" ng-if="pgComp.loadStatus == 'loading'">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<div class="page-message">Loading</div>
+			<div class="circle-spinner">
+				<div class="spinner-container container1">
+					<div class="circle1"></div>
+					<div class="circle2"></div>
+					<div class="circle3"></div>
+					<div class="circle4"></div>
+				</div>
+				<div class="spinner-container container2">
+					<div class="circle1"></div>
+					<div class="circle2"></div>
+					<div class="circle3"></div>
+					<div class="circle4"></div>
+				</div>
+				<div class="spinner-container container3">
+					<div class="circle1"></div>
+					<div class="circle2"></div>
+					<div class="circle3"></div>
+					<div class="circle4"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container" ng-if="pgComp.loadStatus == 'error'">
+	<div class="row">
+		<div class="col-md-12">
+			<br>
+			<div class="well text-center">
+				<div class="page-message">Opps</div>
+				<h2>The requested page could not be found</h2>
+				<h4>Please use the menu above to find what you are looking for.</h4>
+				<a href="/home" type="button" class="btn btn-primary">Home <span class="glyphicon glyphicon-chevron-right"></span></a>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="admin-toolbar-wrapper" ng-if="pgComp.loadStatus == 'success' && pgComp.auth.canEdit">
 	<div class="container">
 		<div class="row">

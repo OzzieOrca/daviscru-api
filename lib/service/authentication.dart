@@ -56,13 +56,14 @@ class Authentication {
       print(e);
     });
   }
-  
+
   void showLoginButton() => buttonDataLoaded = true;
 
   void login(){
     _auth.login();
     buttonDataLoaded = false;
   }
+
   void logout(){
     signedIn = false;
     role = "anonymous";
