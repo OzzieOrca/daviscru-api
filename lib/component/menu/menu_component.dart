@@ -35,5 +35,6 @@ class MenuComponent {
       loadStatus = "success";
     }).catchError((_) => loadStatus = "error");
   }
+
   bool isActive(String menuItemUrl) => path.split(currentUrl)[0] == menuItemUrl;
 }

@@ -10,7 +10,7 @@ class PageRepository {
     return _http.get('/api/v1/pages/$url')
       .then(
         (HttpResponse response) {
-          if(response.data.isEmpty){
+          if(response.data == null || response.data.isEmpty){
             return null;
           };
           return new Page.fromJson(response.data);
