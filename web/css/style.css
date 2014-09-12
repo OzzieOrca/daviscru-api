@@ -240,6 +240,7 @@ h1 .small, h2 .small{
 }
 
 /* Begin Spinners */
+/* From: http://tobiasahlin.com/spinkit/ */
 .three-bounce-spinner {
     margin: 16px 25px 0 0;
     width: 70px;

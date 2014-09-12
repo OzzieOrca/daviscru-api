@@ -21,7 +21,6 @@ dependency_overrides:
       ref: route-with-slashes
   google_oauth2_client:
       git:
-        url: git://github.com/ozzieorca/dart-google-oauth2-library.git
-        ref: Add-tokenNotLoaded-callback
+        url: git://github.com/dart-gde/dart-google-oauth2-library.git
 transformers:
 - angular

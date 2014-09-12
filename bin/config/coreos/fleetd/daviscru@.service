@@ -1,0 +1,22 @@
+[Unit]
+Description=DavisCru Nginx and Dart container
+After=etcd.service
+After=docker.service
+Requires=daviscru-discovery@%i.service
+
+[Service]
+User=core
+EnvironmentFile=/etc/environment
+TimeoutStartSec=0
+KillMode=none
+ExecStartPre=/usr/bin/docker pull ozzieorca/daviscru
+ExecStartPre=-/usr/bin/docker kill daviscru%i
+ExecStartPre=-/usr/bin/docker rm daviscru%i
+ExecStart=/usr/bin/docker run --rm --name daviscru%i -v ~/config/daviscru:/var/www/daviscru/build/bin/config/private --volumes-from data -p ${COREOS_PUBLIC_IPV4}:%i:80 ozzieorca/daviscru
+ExecStop=/usr/bin/docker stop daviscru%i
+
+[X-Fleet]
+X-Conflicts=daviscru@%i.service
+
+#fleetctl destroy daviscru@ daviscru-discovery@; fleetctl submit ~/docker-builder/daviscru/build/bin/config/coreos/fleetd/daviscru@.service ~/docker-builder/daviscru/build/bin/config/coreos/fleetd/daviscru-discovery@.service
+#PORT=8080; fleetctl destroy daviscru@$PORT daviscru-discovery@$PORT; fleetctl load daviscru@$PORT daviscru-discovery@$PORT; fleetctl start daviscru@$PORT

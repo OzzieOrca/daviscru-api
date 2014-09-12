@@ -25,7 +25,7 @@ const API_PREFIX = "/api/v1";
 Map config;
 
 void main() {
-  loadConfig("config/parameters.yml").then(
+  loadConfig("config/private/parameters.yml").then(
     (Map loadedConfig) {
       config = loadedConfig;
       app.setShelfHandler(createStaticHandler("../web",

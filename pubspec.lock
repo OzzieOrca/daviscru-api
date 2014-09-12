@@ -8,7 +8,7 @@ packages:
   angular:
     description: angular
     source: hosted
-    version: "0.13.0"
+    version: "0.14.0"
   args:
     description: args
     source: hosted
@@ -24,7 +24,7 @@ packages:
   bignum:
     description: bignum
     source: hosted
-    version: "0.0.5"
+    version: "0.0.6"
   browser:
     description: browser
     source: hosted
@@ -32,7 +32,7 @@ packages:
   bson:
     description: bson
     source: hosted
-    version: "0.1.20"
+    version: "0.1.23"
   cipher:
     description: cipher
     source: hosted
@@ -67,9 +67,9 @@ packages:
     version: "0.9.0"
   google_oauth2_client:
     description:
-      ref: Add-tokenNotLoaded-callback
-      resolved-ref: "8345cbbd16cab2b93257b8d3767697b0bc0e94fe"
-      url: "git://github.com/ozzieorca/dart-google-oauth2-library.git"
+      ref: null
+      resolved-ref: "2ceabef7f058174d443b1005ac83b16b4084806f"
+      url: "git://github.com/dart-gde/dart-google-oauth2-library.git"
     source: git
     version: "0.4.0"
   google_plus_v1_api:
@@ -91,11 +91,11 @@ packages:
   http_parser:
     description: http_parser
     source: hosted
-    version: "0.0.2+4"
+    version: "0.0.2+5"
   intl:
     description: intl
     source: hosted
-    version: "0.8.10+4"
+    version: "0.11.7"
   json_web_token:
     description: json_web_token
     source: hosted
@@ -108,10 +108,6 @@ packages:
     description: matcher
     source: hosted
     version: "0.11.1"
-  meta:
-    description: meta
-    source: hosted
-    version: "0.8.8"
   mime:
     description: mime
     source: hosted
@@ -140,6 +136,10 @@ packages:
     description: perf_api
     source: hosted
     version: "0.0.9"
+  petitparser:
+    description: petitparser
+    source: hosted
+    version: "1.2.2"
   quiver:
     description: quiver
     source: hosted
@@ -147,11 +147,11 @@ packages:
   redstone:
     description: redstone
     source: hosted
-    version: "0.5.12"
+    version: "0.5.16"
   redstone_mapper:
     description: redstone_mapper
     source: hosted
-    version: "0.1.5"
+    version: "0.1.7"
   redstone_mapper_mongo:
     description: redstone_mapper_mongo
     source: hosted
@@ -170,7 +170,7 @@ packages:
   shelf:
     description: shelf
     source: hosted
-    version: "0.5.4+2"
+    version: "0.5.4+3"
   shelf_static:
     description: shelf_static
     source: hosted
@@ -203,11 +203,7 @@ packages:
     description: utf
     source: hosted
     version: "0.9.0+1"
-  web_components:
-    description: web_components
-    source: hosted
-    version: "0.3.5+1"
   yaml:
     description: yaml
     source: hosted
-    version: "2.0.0"
+    version: "2.0.1+1"

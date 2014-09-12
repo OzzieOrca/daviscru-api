@@ -1,0 +1,22 @@
+[Unit]
+Description=DavisCru Staging Nginx and Dart container
+After=etcd.service
+After=docker.service
+Requires=daviscru-staging-discovery@%i.service
+
+[Service]
+User=core
+EnvironmentFile=/etc/environment
+TimeoutStartSec=0
+KillMode=none
+ExecStartPre=/usr/bin/docker pull ozzieorca/daviscru
+ExecStartPre=-/usr/bin/docker kill daviscru-staging%i
+ExecStartPre=-/usr/bin/docker rm daviscru-staging%i
+ExecStart=/usr/bin/docker run --rm --name daviscru-staging%i -v ~/config/daviscru:/var/www/daviscru/build/bin/config/private --volumes-from data-staging -p ${COREOS_PUBLIC_IPV4}:%i:80 ozzieorca/daviscru
+ExecStop=/usr/bin/docker stop daviscru-staging%i
+
+[X-Fleet]
+X-Conflicts=daviscru-staging@%i.service
+
+#fleetctl destroy daviscru-staging@ daviscru-staging-discovery@; fleetctl submit ~/docker-builder/daviscru/build/bin/config/coreos/fleetd/daviscru-staging@.service ~/docker-builder/daviscru/build/bin/config/coreos/fleetd/daviscru-staging-discovery@.service
+#PORT=8080; fleetctl destroy daviscru-staging@$PORT daviscru-staging-discovery@$PORT; fleetctl load daviscru-staging@$PORT daviscru-staging-discovery@$PORT; fleetctl start daviscru-staging@$PORT

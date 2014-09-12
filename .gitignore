@@ -2,4 +2,5 @@
 build
 packages
 bin/config/parameters.yml
+bin/config/private/parameters.yml
 web/images/uploads
