@@ -9,14 +9,14 @@ User=core
 EnvironmentFile=/etc/environment
 TimeoutStartSec=0
 KillMode=none
-ExecStartPre=/usr/bin/docker pull ozzieorca/daviscru
+ExecStartPre=/usr/bin/docker pull quay.io/ozzieorca/daviscru
 ExecStartPre=-/usr/bin/docker kill daviscru%i
 ExecStartPre=-/usr/bin/docker rm daviscru%i
-ExecStart=/usr/bin/docker run --rm --name daviscru%i -v ~/config/daviscru:/var/www/daviscru/build/bin/config/private --volumes-from data -p ${COREOS_PUBLIC_IPV4}:%i:80 ozzieorca/daviscru
+ExecStart=/usr/bin/docker run --rm --name daviscru%i -v /home/core/config/daviscru:/var/www/daviscru/build/bin/config/private --volumes-from data -p ${COREOS_PUBLIC_IPV4}:%i:80 quay.io/ozzieorca/daviscru:prod
 ExecStop=/usr/bin/docker stop daviscru%i
 
 [X-Fleet]
 X-Conflicts=daviscru@%i.service
 
-#fleetctl destroy daviscru@ daviscru-discovery@; fleetctl submit ~/docker-builder/daviscru/build/bin/config/coreos/fleetd/daviscru@.service ~/docker-builder/daviscru/build/bin/config/coreos/fleetd/daviscru-discovery@.service
+#fleetctl destroy daviscru@ daviscru-discovery@; fleetctl submit ~/fleet/daviscru@.service ~/fleet/daviscru-discovery@.service
 #PORT=8080; fleetctl destroy daviscru@$PORT daviscru-discovery@$PORT; fleetctl load daviscru@$PORT daviscru-discovery@$PORT; fleetctl start daviscru@$PORT

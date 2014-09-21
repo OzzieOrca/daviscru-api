@@ -30,5 +30,5 @@ CMD /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
 #Run server:                    docker run --volumes-from data -d -p 80:80 ozzieorca/daviscru
 #Run terminal inside server:    docker run --volumes-from data -i -t -p 80:80 ozzieorca/daviscru /bin/bash
 #Create data-only container:    docker run -v /data --name data busybox echo Data-only container
-#Backup:                        docker run --volumes-from data -v $(pwd)/backups:/backup busybox tar cvf /backup/daviscru/daviscru-backup.tar /data
-#Restore:                       docker run --volumes-from data -v $(pwd)/backups:/backup busybox tar xvf /backup/daviscru/daviscru-backup.tar
+#Backup:                        docker run --rm --volumes-from data-staging -v $(pwd)/backups:/backup quay.io/ozzieorca/ubuntu zip -r /backup/daviscru/daviscru-backup.zip /data
+#Restore:                       docker run --rm --volumes-from data-staging -v $(pwd)/backups:/backup quay.io/ozzieorca/ubuntu unzip -o /backup/daviscru/daviscru-backup.zip -d /

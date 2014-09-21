@@ -1,0 +1,13 @@
+[Unit]
+Description=Announce DavisCru Nginx and Dart @%i service
+BindsTo=daviscru@%i.service
+After=daviscru@%i.service
+
+[Service]
+User=core
+EnvironmentFile=/etc/environment
+ExecStart=/bin/sh -c 'while true; do etcdctl set /vulcand/upstreams/daviscru/endpoints/daviscru-discovery@%i.service http://$COREOS_PUBLIC_IPV4:%i --ttl 60; etcdctl set /vulcand/hosts/daviscru.com/locations/home/path "/.*" --ttl 60; etcdctl set /vulcand/hosts/daviscru.com/locations/home/upstream daviscru --ttl 60; etcdctl set /vulcand/hosts/www.daviscru.com/locations/home/path "/.*" --ttl 60; etcdctl set /vulcand/hosts/www.daviscru.com/locations/home/upstream daviscru --ttl 60; sleep 45; done'
+ExecStop=/bin/sh -c 'etcdctl rm /vulcand/upstreams/daviscru/endpoints/daviscru-discovery@%i.service'
+
+[X-Fleet]
+X-ConditionMachineOf=daviscru@%i.service

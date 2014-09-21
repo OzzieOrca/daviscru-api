@@ -1,0 +1,26 @@
+[Unit]
+Description=DavisCru Staging Nginx and Dart container
+After=etcd.service
+After=docker.service
+Requires=daviscru-staging-discovery@%i.service
+
+[Service]
+User=core
+EnvironmentFile=/etc/environment
+TimeoutStartSec=0
+KillMode=none
+ExecStartPre=/usr/bin/docker pull quay.io/ozzieorca/daviscru
+ExecStartPre=/usr/bin/docker pull quay.io/ozzieorca/mongodb
+ExecStartPre=docker run --rm --volumes-from data-staging --name mongodb-staging quay.io/ozzieorca/mongodb
+ExecStartPre=-/usr/bin/docker kill daviscru-staging%i
+ExecStartPre=-/usr/bin/docker rm daviscru-staging%i
+ExecStart=/usr/bin/docker run --rm --name daviscru-staging%i -v /home/core/config/daviscru:/var/www/daviscru/build/bin/config/private --volumes-from data-staging --link mongodb-staging:mongodb -p ${COREOS_PUBLIC_IPV4}:%i:80 quay.io/ozzieorca/daviscru
+ExecStop=/usr/bin/docker stop daviscru-staging%i
+
+[X-Fleet]
+X-Conflicts=daviscru-staging@%i.service
+
+#fleetctl destroy daviscru-staging@ daviscru-staging-discovery@; fleetctl submit ~/fleet/daviscru-staging@.service ~/fleet/daviscru-staging-discovery@.service
+#PORT=8080; fleetctl destroy daviscru-staging@$PORT daviscru-staging-discovery@$PORT; fleetctl load daviscru-staging@$PORT daviscru-staging-discovery@$PORT; fleetctl start daviscru-staging@$PORT
+
+#docker run -it --rm --link mongodb-staging:mongodb quay.io/ozzieorca/mongodb mongo --host mongodb
