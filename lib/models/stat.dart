@@ -7,7 +7,7 @@ class Stat {
 
   Stat(this.name, this.value, [this.newRecordValue = 0]);
 
-  Stat.fromJson(Map<String, dynamic> json) : this(json['name'], json['value']);
+  Stat.fromJson(Map<String, dynamic> json) : this(json['name'], json['sum']);
 
   void increment(){
     newRecordValue++;
