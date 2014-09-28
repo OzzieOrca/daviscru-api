@@ -6,9 +6,12 @@ RUN echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen
 RUN apt-get update -y
 RUN apt-get install -y mongodb-org
 
-CMD /usr/bin/mongod -f /data/mongodb.conf
+RUN echo "dbpath=/data/db" > /etc/mongodb.conf
+
+CMD /usr/bin/mongod
+#CMD /usr/bin/mongod -f /data/mongodb.conf
 
 EXPOSE 27017
 EXPOSE 28017
 
-#cd ~/docker-builder/mongodb && docker build -t quay.io/ozzieorca/mongodb . && docker push quay.io/ozzieorca/mongodb
+#cd ~/docker-builder/mongodb && docker build -t quay.io/ozzieorca/mongodb . && docker push quay.io/ozzieorca/mongodb; cd

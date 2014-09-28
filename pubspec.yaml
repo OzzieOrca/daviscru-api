@@ -8,7 +8,7 @@ dependencies:
   http: any
   crypto: any
 
-  google_oauth2_client: any
+  google_oauth2_client: ">= 0.4.1"
   google_plus_v1_api: any
   browser: any
   angular: ">= 0.13.0"
@@ -19,8 +19,5 @@ dependency_overrides:
     git:
       url: git://github.com/dgresham/route.dart.git
       ref: route-with-slashes
-  google_oauth2_client:
-      git:
-        url: git://github.com/dart-gde/dart-google-oauth2-library.git
 transformers:
 - angular

@@ -1,0 +1,17 @@
+[Unit]
+Description=MongoDB container
+After=etcd.service
+After=docker.service
+After=data.service
+Requires=data.service
+
+[Service]
+User=core
+EnvironmentFile=/etc/environment
+TimeoutStartSec=0
+KillMode=none
+ExecStartPre=/usr/bin/docker pull quay.io/ozzieorca/mongodb
+ExecStartPre=-/usr/bin/docker kill mongodb
+ExecStartPre=-/usr/bin/docker rm mongodb
+ExecStart=/usr/bin/docker run --rm --volumes-from data --name mongodb quay.io/ozzieorca/mongodb
+ExecStop=/usr/bin/docker stop mongodb

@@ -1,0 +1,13 @@
+[Unit]
+Description=DavisCru Data container
+After=etcd.service
+After=docker.service
+
+[Service]
+User=core
+EnvironmentFile=/etc/environment
+RemainAfterExit=yes
+TimeoutStartSec=0
+KillMode=none
+ExecStartPre=/usr/bin/docker pull quay.io/ozzieorca/data-only
+ExecStart=/bin/bash -c '/usr/bin/docker start data || /usr/bin/docker run -v /data --name data quay.io/ozzieorca/data-only echo Data-only container'

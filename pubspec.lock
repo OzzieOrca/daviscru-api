@@ -20,7 +20,7 @@ packages:
   barback:
     description: barback
     source: hosted
-    version: "0.14.0+3"
+    version: "0.14.2"
   bignum:
     description: bignum
     source: hosted
@@ -66,16 +66,13 @@ packages:
     source: hosted
     version: "0.9.0"
   google_oauth2_client:
-    description:
-      ref: null
-      resolved-ref: "2ceabef7f058174d443b1005ac83b16b4084806f"
-      url: "git://github.com/dart-gde/dart-google-oauth2-library.git"
-    source: git
-    version: "0.4.0"
+    description: google_oauth2_client
+    source: hosted
+    version: "0.4.1"
   google_plus_v1_api:
     description: google_plus_v1_api
     source: hosted
-    version: "0.4.14"
+    version: "0.4.13"
   grinder:
     description: grinder
     source: hosted
@@ -95,7 +92,7 @@ packages:
   intl:
     description: intl
     source: hosted
-    version: "0.11.7"
+    version: "0.11.8"
   json_web_token:
     description: json_web_token
     source: hosted
@@ -119,7 +116,7 @@ packages:
   mongo_dart_query:
     description: mongo_dart_query
     source: hosted
-    version: "0.1.13"
+    version: "0.1.14"
   more:
     description: more
     source: hosted
@@ -140,6 +137,10 @@ packages:
     description: petitparser
     source: hosted
     version: "1.2.2"
+  pool:
+    description: pool
+    source: hosted
+    version: "1.0.1"
   quiver:
     description: quiver
     source: hosted
@@ -151,7 +152,7 @@ packages:
   redstone_mapper:
     description: redstone_mapper
     source: hosted
-    version: "0.1.7"
+    version: "0.1.8+1"
   redstone_mapper_mongo:
     description: redstone_mapper_mongo
     source: hosted
@@ -170,11 +171,11 @@ packages:
   shelf:
     description: shelf
     source: hosted
-    version: "0.5.4+3"
+    version: "0.5.5"
   shelf_static:
     description: shelf_static
     source: hosted
-    version: "0.2.0"
+    version: "0.2.1"
   source_maps:
     description: source_maps
     source: hosted
@@ -186,7 +187,7 @@ packages:
   stack_trace:
     description: stack_trace
     source: hosted
-    version: "0.9.3+2"
+    version: "1.0.2"
   string_scanner:
     description: string_scanner
     source: hosted

@@ -1,0 +1,13 @@
+[Unit]
+Description=Announce DavisCru Staging Nginx and Dart @%i service
+BindsTo=daviscru-staging@%i.service
+After=daviscru-staging@%i.service
+
+[Service]
+User=core
+EnvironmentFile=/etc/environment
+ExecStart=/bin/sh -c 'while true; do etcdctl set /vulcand/upstreams/daviscru-staging/endpoints/daviscru-staging-discovery@%i.service http://$COREOS_PUBLIC_IPV4:%i --ttl 60; etcdctl setdir /vulcand/hosts/staging.daviscru.com/locations/home -ttl 60; etcdctl set /vulcand/hosts/staging.daviscru.com/locations/home/path "/.*"; etcdctl set /vulcand/hosts/staging.daviscru.com/locations/home/upstream daviscru-staging; sleep 45; done'
+ExecStop=/bin/sh -c 'etcdctl rm /vulcand/upstreams/daviscru-staging/endpoints/daviscru-staging-discovery@%i.service'
+
+[X-Fleet]
+X-ConditionMachineOf=daviscru-staging@%i.service

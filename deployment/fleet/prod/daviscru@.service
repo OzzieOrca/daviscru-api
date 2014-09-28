@@ -1,0 +1,36 @@
+[Unit]
+Description=DavisCru Nginx and Dart container
+After=etcd.service
+After=docker.service
+
+After=data.service
+Requires=data.service
+
+After=mongodb.service
+Requires=mongodb.service
+
+Requires=daviscru-discovery@%i.service
+
+[Service]
+User=core
+EnvironmentFile=/etc/environment
+TimeoutStartSec=0
+KillMode=none
+ExecStartPre=/usr/bin/docker pull quay.io/ozzieorca/daviscru
+ExecStartPre=-/usr/bin/docker kill daviscru%i
+ExecStartPre=-/usr/bin/docker rm daviscru%i
+ExecStart=/usr/bin/docker run --rm --name daviscru%i -v /home/core/config/daviscru:/var/www/daviscru/build/bin/config/private --volumes-from data --link mongodb:mongodb -p ${COREOS_PUBLIC_IPV4}:%i:80 quay.io/ozzieorca/daviscru
+ExecStop=/usr/bin/docker stop daviscru%i
+
+[X-Fleet]
+X-Conflicts=daviscru@%i.service
+
+#Restart service
+#PORT=8080; fleetctl destroy daviscru@ daviscru-discovery@; fleetctl submit ~/fleet/daviscru@.service ~/fleet/daviscru-discovery@.service; fleetctl destroy daviscru@$PORT daviscru-discovery@$PORT; fleetctl load daviscru@$PORT daviscru-discovery@$PORT; fleetctl start daviscru@$PORT
+
+#Access MongoDB REPL
+#docker run -it --rm --link mongodb:mongodb quay.io/ozzieorca/mongodb mongo --host mongodb
+
+#Start MongoDB dev container
+#docker run -v /data --name data-dev quay.io/ozzieorca/data-only echo Data-only dev container
+#docker run --rm --volumes-from data-dev -p 27017:27017 --name mongodb-dev quay.io/ozzieorca/mongodb

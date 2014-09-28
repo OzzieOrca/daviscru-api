@@ -1,0 +1,17 @@
+[Unit]
+Description=MongoDB Staging container
+After=etcd.service
+After=docker.service
+After=data-staging.service
+Requires=data-staging.service
+
+[Service]
+User=core
+EnvironmentFile=/etc/environment
+TimeoutStartSec=0
+KillMode=none
+ExecStartPre=/usr/bin/docker pull quay.io/ozzieorca/mongodb
+ExecStartPre=-/usr/bin/docker kill mongodb-staging
+ExecStartPre=-/usr/bin/docker rm mongodb-staging
+ExecStart=/usr/bin/docker run --rm --volumes-from data-staging --name mongodb-staging quay.io/ozzieorca/mongodb
+ExecStop=/usr/bin/docker stop mongodb-staging

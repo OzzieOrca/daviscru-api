@@ -32,3 +32,5 @@ CMD /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
 #Create data-only container:    docker run -v /data --name data busybox echo Data-only container
 #Backup:                        docker run --rm --volumes-from data-staging -v $(pwd)/backups:/backup quay.io/ozzieorca/ubuntu zip -r /backup/daviscru/daviscru-backup.zip /data
 #Restore:                       docker run --rm --volumes-from data-staging -v $(pwd)/backups:/backup quay.io/ozzieorca/ubuntu unzip -o /backup/daviscru/daviscru-backup.zip -d /
+#Backup MongoDB                 docker run --rm --link mongodb-staging:mongodb -v $(pwd)/backups/db:/backup quay.io/ozzieorca/mongodb mongodump --host mongodb --out /backup  --db daviscru
+#Restore MongoDB                docker run --rm --link mongodb-staging:mongodb -v $(pwd)/backups/db:/backup quay.io/ozzieorca/mongodb mongorestore --host mongodb /backup
