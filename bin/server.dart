@@ -15,10 +15,10 @@ import 'package:dart_config/default_server.dart';
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart';
 
-part "package:daviscru/server/utils.dart";
 part "package:daviscru/server/endpoints/pages.dart";
 part "package:daviscru/server/endpoints/menu.dart";
 part "package:daviscru/server/endpoints/users.dart";
+part "package:daviscru/server/endpoints/auth.dart";
 part "package:daviscru/server/endpoints/tools/stats.dart";
 
 const API_PREFIX = "/api/v1";

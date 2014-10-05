@@ -8,7 +8,6 @@ class Authentication {
   GoogleOAuth2 _auth;
   String clientId;
   String scope;
-  String csrf;
 
   String name;
   String email;
@@ -18,11 +17,10 @@ class Authentication {
   bool signedIn = false;
 
   Authentication(this._http) {
-    _http.get('/api/v1/users/authenticate/google/setup-api-request')
+    _http.get('/api/v1/auth/google/get-parameters')
       .then((HttpResponse response) {
         clientId = response.data["client_id"];
         scope = response.data["scope"];
-        csrf = response.data["csrf"];
         _auth = new GoogleOAuth2(
             clientId,
             [scope],
@@ -36,11 +34,8 @@ class Authentication {
   oauthReady(Token token){
     //Verify Token
     Map dataToVerify = new Map();
-    dataToVerify["csrf"] = csrf;
     dataToVerify["access_token"] = token.data;
-    dataToVerify["user_id"] = token.userId;
-    dataToVerify["email"] = token.email;
-    _http.post('/api/v1/users/authenticate/google/verify', JSON.encode(dataToVerify))
+    _http.post('/api/v1/auth/google/login', JSON.encode(dataToVerify))
     .then((HttpResponse response) {
       Map serverResponse = response.data;
       if(serverResponse["verified"] == true){
