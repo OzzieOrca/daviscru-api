@@ -33,8 +33,12 @@ class Auth {
         if(user == null){
           return {"verified": false};
         }
-        user["verified"] = true;
-        return user;
+        Map filteredUserInfo = new Map();
+        filteredUserInfo["verified"] = true;
+        filteredUserInfo["name"] = user["name"];
+        filteredUserInfo["picture"] = user["picture"];
+        filteredUserInfo["role"] = user["role"];
+        return filteredUserInfo;
       });
     }).catchError((e) => print(e));
   }
@@ -42,17 +46,14 @@ class Auth {
   saveOrUpdateUser(String userId, bool update){
     return mongoDb.collection("users").findOne({'userId': userId}).then((user){
       if(!update && user != null){
-        print("retrieve");
         return user;
       }else{
         return http.get("https://www.googleapis.com/oauth2/v1/userinfo?access_token=${accessToken}")
         .then((Response googleResponseJSON){
           Map googleResponse = JSON.decode(googleResponseJSON.body);
           if(user == null){
-            print("insert");
             mongoDb.insert("users", {"role": "user", "userId": userId, "email": googleResponse["email"], "name": googleResponse["name"], "picture": googleResponse["picture"]});
           }else{
-            print("update");
             mongoDb.collection("users").update({'userId': userId}, {"\$set": {"email": googleResponse["email"], "name": googleResponse["name"], "picture": googleResponse["picture"]}});
           }
           return mongoDb.collection("users").findOne({'userId': userId});
