@@ -1,0 +1,25 @@
+[Unit]
+Description=MongoDB Dev container
+After=etcd.service
+After=docker.service
+After=data-dev.service
+Requires=data-dev.service
+
+[Service]
+User=core
+EnvironmentFile=/etc/environment
+TimeoutStartSec=0
+Restart=always
+KillMode=none
+ExecStartPre=/usr/bin/docker pull quay.io/ozzieorca/mongodb
+ExecStartPre=-/usr/bin/docker kill mongodb-dev
+ExecStartPre=-/usr/bin/docker rm mongodb-dev
+ExecStart=/usr/bin/docker run --rm --volumes-from data-dev -p 27017:27017 --name mongodb-dev quay.io/ozzieorca/mongodb
+ExecStop=/usr/bin/docker stop mongodb-dev
+
+#Start MongoDB dev container
+#docker run -v /data --name data-dev quay.io/ozzieorca/data-only echo Data-only dev container
+#docker run --rm --volumes-from data-dev -p 27017:27017 --name mongodb-dev quay.io/ozzieorca/mongodb
+
+#Access MongoDB REPL
+#docker run -it --rm --link mongodb-dev:mongodb quay.io/ozzieorca/mongodb mongo --host mongodb

@@ -1,0 +1,13 @@
+init_config:
+
+instances:
+    # For every instance, you have an `nginx_status_url` and (optionally)
+    # a list of tags.
+
+    -   nginx_status_url: http://daviscru.com/nginx_status/
+        tags:
+            -   instance:daviscru-prod
+
+    -   nginx_status_url: http://staging.daviscru.com/nginx_status/
+        tags:
+            -   instance:daviscru-staging

@@ -15,3 +15,38 @@ coreos:
       command: start
     - name: fleet.service
       command: start
+    - name: swap.service
+      command: start
+      content: |
+        [Unit]
+        Description=Turn on swap
+
+        [Service]
+        User=root
+        Type=oneshot
+        Environment="SWAPFILE=/2GiB.swap"
+        RemainAfterExit=true
+        ExecStartPre=/usr/bin/sh -c "/usr/bin/touch ${SWAPFILE} && /usr/bin/chattr +C ${SWAPFILE} && /usr/bin/fallocate -l 2048m ${SWAPFILE} && /usr/bin/chmod 600 ${SWAPFILE} && /usr/sbin/mkswap ${SWAPFILE} && /usr/sbin/losetup -f ${SWAPFILE}"
+        ExecStart=/usr/bin/sh -c "/sbin/swapon $(/usr/sbin/losetup -j ${SWAPFILE} | /usr/bin/cut -d : -f 1)"
+        ExecStop=/usr/bin/sh -c "/sbin/swapoff $(/usr/sbin/losetup -j ${SWAPFILE} | /usr/bin/cut -d : -f 1)"
+        ExecStopPost=/usr/bin/sh -c "/usr/sbin/losetup -d $(/usr/sbin/losetup -j ${SWAPFILE} | /usr/bin/cut -d : -f 1)"
+
+        [Install]
+        WantedBy=multi-user.target
+    - name: datadog.service
+      command: start
+      content: |
+        [Unit]
+        Description=Datadog Monitoring Service
+
+        [Service]
+        User=core
+        TimeoutStartSec=0
+        KillMode=none
+        ExecStartPre=-/usr/bin/docker kill dd-agent
+        ExecStartPre=-/usr/bin/docker rm dd-agent
+        ExecStartPre=/usr/bin/docker pull quay.io/ozzieorca/datadog
+        ExecStart=/usr/bin/bash -c "/usr/bin/docker run --privileged --name dd-agent -h `hostname` -v /var/run/docker.sock:/var/run/docker.sock -v /proc/mounts:/host/proc/mounts:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e API_KEY=`etcdctl get /ddapikey` quay.io/ozzieorca/datadog"
+
+        [X-Fleet]
+        Global=true

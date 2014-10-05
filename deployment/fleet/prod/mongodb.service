@@ -9,6 +9,7 @@ Requires=data.service
 User=core
 EnvironmentFile=/etc/environment
 TimeoutStartSec=0
+Restart=always
 KillMode=none
 ExecStartPre=/usr/bin/docker pull quay.io/ozzieorca/mongodb
 ExecStartPre=-/usr/bin/docker kill mongodb

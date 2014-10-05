@@ -9,9 +9,9 @@ RUN apt-get install -y mongodb-org
 RUN echo "dbpath=/data/db" > /etc/mongodb.conf
 
 CMD /usr/bin/mongod
-#CMD /usr/bin/mongod -f /data/mongodb.conf
 
 EXPOSE 27017
 EXPOSE 28017
 
+#Docker Build
 #cd ~/docker-builder/mongodb && docker build -t quay.io/ozzieorca/mongodb . && docker push quay.io/ozzieorca/mongodb; cd

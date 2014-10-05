@@ -20,4 +20,5 @@ WORKDIR /root
 # Define default command.
 CMD ["bash"]
 
-#cd ~/docker-builder/ubuntu && docker build -t quay.io/ozzieorca/ubuntu . && docker push quay.io/ozzieorca/ubuntu
+#Docker Build
+#cd ~/docker-builder/ubuntu && docker build -t quay.io/ozzieorca/ubuntu . && docker push quay.io/ozzieorca/ubuntu; cd

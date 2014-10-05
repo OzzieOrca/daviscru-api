@@ -15,6 +15,7 @@ Requires=daviscru-staging-discovery@%i.service
 User=core
 EnvironmentFile=/etc/environment
 TimeoutStartSec=0
+Restart=always
 KillMode=none
 ExecStartPre=/usr/bin/docker pull quay.io/ozzieorca/daviscru
 ExecStartPre=-/usr/bin/docker kill daviscru-staging%i
@@ -27,9 +28,3 @@ X-Conflicts=daviscru-staging@%i.service
 
 #Restart service
 #PORT=8080; fleetctl destroy daviscru-staging@ daviscru-staging-discovery@; fleetctl submit ~/fleet/daviscru-staging@.service ~/fleet/daviscru-staging-discovery@.service; fleetctl destroy daviscru-staging@$PORT daviscru-staging-discovery@$PORT; fleetctl load daviscru-staging@$PORT daviscru-staging-discovery@$PORT; fleetctl start daviscru-staging@$PORT
-
-#Access MongoDB REPL
-#docker run -it --rm --link mongodb-staging:mongodb quay.io/ozzieorca/mongodb mongo --host mongodb
-
-#Start MongoDB dev container
-#docker run --rm --volumes-from data-dev -p 27017:27017--name mongodb-dev quay.io/ozzieorca/mongodb
