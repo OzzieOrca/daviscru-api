@@ -1,6 +1,9 @@
 library stats_panel;
 
 import 'package:angular/angular.dart';
+import 'package:daviscru/service/authentication.dart';
+import "dart:convert";
+
 part 'package:daviscru/service/repositories/stats_repository.dart';
 
 part 'package:daviscru/models/stat.dart';

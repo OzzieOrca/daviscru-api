@@ -1,5 +1,6 @@
 library server;
 
+import 'dart:io';
 import 'dart:math';
 import 'dart:convert';
 
@@ -15,6 +16,7 @@ import 'package:dart_config/default_server.dart';
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart';
 
+part "package:daviscru/server/authentication.dart";
 part "package:daviscru/server/endpoints/pages.dart";
 part "package:daviscru/server/endpoints/menu.dart";
 part "package:daviscru/server/endpoints/users.dart";
@@ -34,6 +36,7 @@ void main() {
 
       var dbManager = new MongoDbManager(config["database"]["mongodb"]["uri"], poolSize: 5);
       app.addPlugin(getMapperPlugin(dbManager));
+      app.addPlugin(Authentication.AuthenticationPlugin);
 
       app.setupConsoleLog();
       app.start();

@@ -1,8 +1,9 @@
 part of server;
 
 @app.Group("$API_PREFIX/tools/stats")
+@Secure("Admin")
 class Stats {
-  @app.DefaultRoute()
+  @app.DefaultRoute(methods: const [app.POST])
   stats(@app.Attr() MongoDb dbConn){
     return dbConn.collection("stats-categories").aggregate([
       {
@@ -30,5 +31,10 @@ class Stats {
         }).toList();
       });
     });
+  }
+
+  @app.Route("/user", methods: const [app.POST])
+  userStats(@app.Attr() MongoDb dbConn){
+
   }
 }

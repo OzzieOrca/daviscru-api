@@ -8,6 +8,7 @@ class Authentication {
   GoogleOAuth2 _auth;
   String clientId;
   String scope;
+  String token;
 
   String name;
   String email;
@@ -33,12 +34,12 @@ class Authentication {
 
   oauthReady(Token token){
     //Verify Token
-    Map dataToVerify = new Map();
-    dataToVerify["access_token"] = token.data;
+    Map dataToVerify = {"access_token": token.data};
     _http.post('/api/v1/auth/google/login', JSON.encode(dataToVerify))
     .then((HttpResponse response) {
       Map serverResponse = response.data;
       if(serverResponse["verified"] == true){
+        this.token = token.data;
         email = serverResponse["email"];
         role = serverResponse["role"];
         name = serverResponse["name"];
@@ -62,6 +63,7 @@ class Authentication {
   void logout(){
     signedIn = false;
     role = "anonymous";
+    token = null;
     _auth.logout();
   }
 
