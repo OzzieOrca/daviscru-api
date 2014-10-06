@@ -15,5 +15,7 @@ class Auth {
 
   @app.Route("/google/login", methods: const [app.POST])
   @Login()
-  googleLogin();
+  googleLogin(){
+    //Need these curly braces instead of semicolon to prevent builder from removing method
+  }
 }
