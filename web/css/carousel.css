@@ -11,6 +11,7 @@
 
 /* Pad the edges of the mobile views a bit */
 .marketing {
+  margin-top: 10px;
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -33,7 +34,9 @@
 ------------------------- */
 
 .featurette-divider {
-  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+  /*margin: 80px 0; /* Space out the Bootstrap <hr> more */
+  margin-top: 50px;
+  margin-bottom: 40px;
 }
 
 /* Thin out the marketing headings */
