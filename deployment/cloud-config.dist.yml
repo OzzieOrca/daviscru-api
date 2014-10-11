@@ -1,5 +1,27 @@
 #cloud-config
 
+write_files:
+  - path: /home/core/journal2logentries.sh
+    permissions: '0744'
+    owner: root:root
+    content: |
+      #!/bin/bash
+      # CoreOS on DigitalOcean: push systemd journal logs to logentries.com
+      # get your private token from logentries.com, see https://logentries.com/doc/input-token
+
+      # token in etcd?
+      token=$(etcdctl get /logentries/token)
+      if [[ ! $token ]]; then
+        # we have a problem!
+        exit 10
+      fi
+      journalctl -o short -f | awk -v token=$token '{ print token, $0; fflush(); }' | ncat --ssl --ssl-verify data.logentries.com 20000
+
+      # should you have problems verifying SSL certificates, here are all certificates from logentries.com
+      # https://logentries.com/doc/certificates
+      # no ssl required?
+      # journalctl -o short -f | awk -v token=$token '{ print token, $0; fflush(); }' | ncat data.logentries.com 10000
+
 coreos:
   etcd:
     # generate a new token for each unique cluster from https://discovery.etcd.io/new
@@ -38,6 +60,7 @@ coreos:
       content: |
         [Unit]
         Description=Datadog Monitoring Service
+        After=systemd-networkd.service
 
         [Service]
         User=core
@@ -46,7 +69,19 @@ coreos:
         ExecStartPre=-/usr/bin/docker kill dd-agent
         ExecStartPre=-/usr/bin/docker rm dd-agent
         ExecStartPre=/usr/bin/docker pull quay.io/ozzieorca/datadog
-        ExecStart=/usr/bin/bash -c "/usr/bin/docker run --privileged --name dd-agent -h `hostname` -v /var/run/docker.sock:/var/run/docker.sock -v /proc/mounts:/host/proc/mounts:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e API_KEY=`etcdctl get /ddapikey` quay.io/ozzieorca/datadog"
+        ExecStart=/usr/bin/bash -c "/usr/bin/docker run --privileged --name dd-agent -h `hostname` -v /var/run/docker.sock:/var/run/docker.sock -v /proc/mounts:/host/proc/mounts:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e API_KEY=`etcdctl get /datadog/apikey` quay.io/ozzieorca/datadog"
+    - name: logentries.service
+      command: start
+      runtime: no
+      content: |
+        [Unit]
+        Description=Push journal logs to logentries.com
+        After=systemd-journald.service
+        After=systemd-networkd.service
 
-        [X-Fleet]
-        Global=true
+        [Service]
+        Restart=always
+        ExecStart=/bin/bash /home/core/journal2logentries.sh
+
+        [Install]
+        WantedBy=multi-user.target

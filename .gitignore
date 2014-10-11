@@ -4,4 +4,5 @@ packages
 bin/config/parameters.yml
 bin/config/private/parameters.yml
 web/images/uploads
-deployment/cloud-config
+deployment/cloud-config.yml
+deployment/init-etcd.sh
