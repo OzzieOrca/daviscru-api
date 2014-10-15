@@ -4,11 +4,11 @@ packages:
   analyzer:
     description: analyzer
     source: hosted
-    version: "0.18.0"
+    version: "0.15.7"
   angular:
     description: angular
     source: hosted
-    version: "0.14.0"
+    version: "1.0.0"
   args:
     description: args
     source: hosted
@@ -60,7 +60,7 @@ packages:
   di:
     description: di
     source: hosted
-    version: "2.0.2"
+    version: "3.3.1"
   fixnum:
     description: fixnum
     source: hosted
@@ -92,7 +92,7 @@ packages:
   intl:
     description: intl
     source: hosted
-    version: "0.11.8"
+    version: "0.11.9"
   json_web_token:
     description: json_web_token
     source: hosted
@@ -112,7 +112,7 @@ packages:
   mongo_dart:
     description: mongo_dart
     source: hosted
-    version: "0.1.42"
+    version: "0.1.44"
   mongo_dart_query:
     description: mongo_dart_query
     source: hosted
@@ -125,6 +125,10 @@ packages:
     description: oauth2
     source: hosted
     version: "0.9.3"
+  observe:
+    description: observe
+    source: hosted
+    version: "0.10.1+2"
   path:
     description: path
     source: hosted
@@ -171,11 +175,15 @@ packages:
   shelf:
     description: shelf
     source: hosted
-    version: "0.5.5"
+    version: "0.5.5+1"
   shelf_static:
     description: shelf_static
     source: hosted
     version: "0.2.1"
+  smoke:
+    description: smoke
+    source: hosted
+    version: "0.1.0+1"
   source_maps:
     description: source_maps
     source: hosted
@@ -192,10 +200,6 @@ packages:
     description: string_scanner
     source: hosted
     version: "0.1.0"
-  typed_mock:
-    description: typed_mock
-    source: hosted
-    version: "0.0.4"
   unittest:
     description: unittest
     source: hosted

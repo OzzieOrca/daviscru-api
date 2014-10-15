@@ -1,4 +1,4 @@
-<div class="container" ng-if="pgComp.loadStatus == 'loading'">
+<div class="container" ng-if="loadStatus == 'loading'">
 	<div class="row">
 		<div class="col-md-12 text-center">
 			<div class="page-message">Loading</div>
@@ -25,7 +25,7 @@
 		</div>
 	</div>
 </div>
-<div class="container" ng-if="pgComp.loadStatus == 'error'">
+<div class="container" ng-if="loadStatus == 'error'">
 	<div class="row">
 		<div class="col-md-12">
 			<br>
@@ -38,7 +38,7 @@
 		</div>
 	</div>
 </div>
-<div class="admin-toolbar-wrapper" ng-if="pgComp.loadStatus == 'success' && pgComp.auth.canEdit">
+<div class="admin-toolbar-wrapper" ng-if="loadStatus == 'success' && auth.canEdit">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 admin-toolbar">
@@ -49,24 +49,24 @@
 							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-plus"></span> Add Widget <span class="caret"></span></button>
 							<ul class="dropdown-menu" role="menu">
 								<li class="dropdown-header">Large Components</li>
-								<li><a href="#" ng-click="pgComp.page.addWidget('pageheader')">Page Header</a></li>
-								<li><a href="#" ng-click="pgComp.page.addWidget('jumbotron')">Jumbotron</a></li>
-								<li><a href="#" ng-click="pgComp.page.addWidget('carousel')">Carousel</a></li>
+								<li><a href="#" ng-click="page.addWidget('pageheader')">Page Header</a></li>
+								<li><a href="#" ng-click="page.addWidget('jumbotron')">Jumbotron</a></li>
+								<li><a href="#" ng-click="page.addWidget('carousel')">Carousel</a></li>
 								<li class="divider"></li>
 								<li class="dropdown-header">Media Display</li>
-								<li><a href="#" ng-click="pgComp.page.addWidget('thumbnail')">Thumbnail</a></li>
+								<li><a href="#" ng-click="page.addWidget('thumbnail')">Thumbnail</a></li>
 								<li class="divider"></li>
 								<li class="dropdown-header">Content Pieces</li>
-								<li><a href="#" ng-click="pgComp.page.addWidget('well')">Well</a></li>
-								<li><a href="#" ng-click="pgComp.page.addWidget('3-panel-grid')">3 Panel Grid</a></li>
-								<li><a href="#" ng-click="pgComp.page.addWidget('featurette')">Featurette</a></li>
+								<li><a href="#" ng-click="page.addWidget('well')">Well</a></li>
+								<li><a href="#" ng-click="page.addWidget('3-panel-grid')">3 Panel Grid</a></li>
+								<li><a href="#" ng-click="page.addWidget('featurette')">Featurette</a></li>
 								<li class="divider"></li>
 								<li class="dropdown-header">Simple Widgets</li>
-								<li><a href="#" ng-click="pgComp.page.addWidget('text')">Text</a></li>
-								<li><a href="#" ng-click="pgComp.page.addWidget('html')">HTML Code</a></li>
+								<li><a href="#" ng-click="page.addWidget('text')">Text</a></li>
+								<li><a href="#" ng-click="page.addWidget('html')">HTML Code</a></li>
 								<li class="divider"></li>
 								<li class="dropdown-header">External Resources</li>
-								<li><a href="#" ng-click="pgComp.page.addWidget('youtube')">YouTube Video</a></li>
+								<li><a href="#" ng-click="page.addWidget('youtube')">YouTube Video</a></li>
 							</ul>
 						</div>
 					</div>
@@ -85,10 +85,11 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div id="status-bar">
-					<span class="label label-default" data-toggle="tooltip" title="{{ times.created.timestamp | date:'medium' }}">Created: {{ times.created.timesince }} ago</span>
+					<!--<span class="label label-default" data-toggle="tooltip" title="{{ times.created.timestamp | date:'medium' }}">Created: {{ times.created.timesince }} ago</span>
 					<span class="label label-success" data-toggle="tooltip" title="{{ times.lastPublished.timestamp | date:'medium' }}">Last Published: {{ times.lastPublished.timesince }} ago</span>
 					<span class="label label-info" data-toggle="tooltip" title="{{ times.lastModified.timestamp | date:'medium' }}">Last Modified: {{ times.lastModified.timesince }} ago</span>
-					<br><br>
+					<br>-->
+					<br>
 				</div>
 			</div>
 		</div>
@@ -100,18 +101,18 @@
 <template id="dynamic_panel_button.html" type="text/ng-template">
 	<a href="{{ panel.button.uri }}" type="button" class="btn btn-primary" ng-if="panel.button != null" target="{{ panel.button.target }}">{{ panel.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
 </template>
-<div ng-repeat="widget in pgComp.page.widgets">
+<div ng-repeat="widget in page.widgets">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="btn-group pull-right widget-actions" ng-if="pgComp.auth.canEdit">
+				<div class="btn-group pull-right widget-actions" ng-if="auth.canEdit">
 					<button type="button" class="btn btn-xs btn-default" disabled="disabled">{{ widget.widgetType }}</button>
 							<button type="button" class="btn btn-xs btn-info" ng-click="widget.swapAlignment()"  ng-if="widget.widgetType == 'featurette'"><span class="glyphicon glyphicon-transfer"></span></button>
 							<button type="button" class="btn btn-xs btn-info" ng-click="widget.toggleDivider()"><span class="glyphicon" ng-class="{'glyphicon-check': widget.hasDivider, 'glyphicon-unchecked': !widget.hasDivider}"></span> Divider</button>
-							<button type="button" class="btn btn-xs btn-primary" ng-click="pgComp.page.moveWidgetUp(widget)" ng-disabled="pgComp.page.isFirstWidget(widget)"><span class="glyphicon glyphicon-arrow-up"></span></button>
-							<button type="button" class="btn btn-xs btn-primary" ng-click="pgComp.page.moveWidgetDown(widget)" ng-disabled="pgComp.page.isLastWidget(widget)"><span class="glyphicon glyphicon-arrow-down"></span></button>
-							<button type="button" class="btn btn-xs btn-warning" ng-click="pgComp.page.resetWidget(widget)"><span class="glyphicon glyphicon-refresh"></span> Reset</button>
-					<button type="button" class="btn btn-xs btn-danger" ng-click="pgComp.page.deleteWidget(widget)"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+							<button type="button" class="btn btn-xs btn-primary" ng-click="page.moveWidgetUp(widget)" ng-disabled="page.isFirstWidget(widget)"><span class="glyphicon glyphicon-arrow-up"></span></button>
+							<button type="button" class="btn btn-xs btn-primary" ng-click="page.moveWidgetDown(widget)" ng-disabled="page.isLastWidget(widget)"><span class="glyphicon glyphicon-arrow-down"></span></button>
+							<button type="button" class="btn btn-xs btn-warning" ng-click="page.resetWidget(widget)"><span class="glyphicon glyphicon-refresh"></span> Reset</button>
+					<button type="button" class="btn btn-xs btn-danger" ng-click="page.deleteWidget(widget)"><span class="glyphicon glyphicon-trash"></span> Delete</button>
 				</div>
 				<hr class="featurette-divider" ng-if="widget.hasDivider">
 			</div>
@@ -142,10 +143,10 @@
 				</div>
 			</div>
 			<!-- Carousel -->
-			<div id="carousel-{{ $parent.$index }}" class="carousel slide hidden-xs" data-ride="carousel" ng-switch-when="carousel">
+			<div id="carousel-{{ $index }}" class="carousel slide hidden-xs" data-ride="carousel" ng-switch-when="carousel" ng-show="widget.setOrder($index) || true">
 				<!-- Indicators -->
 				<ol class="carousel-indicators">
-					<li data-target="#carousel-{{ $parent.$index }}" data-slide-to="{{ $index }}" ng-class="{'active': $first}"  ng-repeat="panel in widget.panelContent"></li>
+					<li data-target="#carousel-{{ widget.order }}" data-slide-to="{{ $index }}" ng-class="{'active': $first}"  ng-repeat="panel in widget.panelContent"></li>
 				</ol>
 
 				<!-- Wrapper for slides -->
@@ -160,10 +161,10 @@
 				</div>
 
 				<!-- Controls -->
-				<a class="left carousel-control" href="#carousel-{{ $parent.$index }}" data-slide="prev">
+				<a class="left carousel-control" href="#carousel-{{ $index }}" data-slide="prev">
 					<span class="icon-prev"></span>
 				</a>
-				<a class="right carousel-control" href="#carousel-{{ $parent.$index }}" data-slide="next">
+				<a class="right carousel-control" href="#carousel-{{ $index }}" data-slide="next">
 					<span class="icon-next"></span>
 				</a>
 			</div>

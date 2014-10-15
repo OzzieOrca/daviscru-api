@@ -1,14 +1,14 @@
 <div class="row">
 	<div class="col-sm-6">
 		<div class="btn-group">
-			<button ng-click="statsPanel.save()" type="button" class="btn btn-success"><span class="glyphicon glyphicon-check"></span> Save new records</button>
-			<button ng-click="statsPanel.clear()" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-repeat"></span> Clear</button>
+			<button ng-click="save()" type="button" class="btn btn-success"><span class="glyphicon glyphicon-check"></span> Save new records</button>
+			<button ng-click="clear()" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-repeat"></span> Clear</button>
 		</div>
 		<br><br>
 	</div>
 </div>
 <div class="row">
-	<div ng-switch="statsPanel.loadStatus">
+	<div ng-switch="loadStatus">
 		<div ng-switch-when="loading" class="alert alert-warning text-center">
 			Loading...
 		</div>
@@ -16,7 +16,7 @@
 			Sorry! We were unable to load this data.
 		</div>
 		<div ng-switch-when="success">
-			<div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="stat in statsPanel.stats">
+			<div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="stat in stats">
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<h4>{{stat.name}}</h4>
