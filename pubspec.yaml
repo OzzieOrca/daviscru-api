@@ -3,6 +3,7 @@ version: 0.0.1
 dependencies:
   redstone: ">= 0.5.18"
   redstone_mapper_mongo: any
+  grinder: any
   shelf_static: any
   dart_config: any
   http: any
