@@ -1,7 +1,7 @@
 name: daviscru
 version: 0.0.1
 dependencies:
-  redstone: any
+  redstone: ">= 0.5.18"
   redstone_mapper_mongo: any
   shelf_static: any
   dart_config: any
@@ -15,7 +15,6 @@ dependencies:
   route_hierarchical: any
   path: any
 dependency_overrides:
-  di: ">=3.3.1"
   route_hierarchical:
     git:
       url: git://github.com/dgresham/route.dart.git

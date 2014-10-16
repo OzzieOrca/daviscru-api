@@ -1,4 +1,5 @@
 .idea
+.pub
 build
 packages
 bin/config/parameters.yml

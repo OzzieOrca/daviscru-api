@@ -8,9 +8,17 @@ RUN apt-get install -y software-properties-common python-software-properties
 
 RUN apt-get install -y supervisor
 RUN apt-get install -y nginx
-RUN apt-add-repository ppa:hachre/dart
+
+# Enable HTTPS for apt and install Dart
 RUN apt-get update
-RUN apt-get install -y dartsdk
+RUN apt-get install apt-transport-https
+# Get the Google Linux package signing key.
+RUN sh -c 'curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
+# Set up the location of the stable repository.
+RUN sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
+RUN sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_unstable.list > /etc/apt/sources.list.d/dart_unstable.list'
+RUN apt-get update
+RUN apt-get install -y dart
 
 ADD bin/config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
