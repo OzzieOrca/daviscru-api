@@ -16,7 +16,6 @@ RUN apt-get install apt-transport-https
 RUN sh -c 'curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
 # Set up the location of the stable repository.
 RUN sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
-RUN sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_unstable.list > /etc/apt/sources.list.d/dart_unstable.list'
 RUN apt-get update
 RUN apt-get install -y dart
 
@@ -35,8 +34,9 @@ EXPOSE 80
 
 CMD /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
 
-#Run server:                    docker run --volumes-from data -d -p 80:80 ozzieorca/daviscru
-#Run terminal inside server:    docker run --volumes-from data -i -t -p 80:80 ozzieorca/daviscru /bin/bash
+#Run server:                    docker run --rm --volumes-from data -d -p 80:80 quay.io/ozzieorca/daviscru
+#Run terminal inside server:    docker run --rm --volumes-from data -i -t -p 80:80 quay.io/ozzieorca/daviscru /bin/bash
+#Get Dart Package Versions:     docker run --rm --volumes-from data -i -t quay.io/ozzieorca/daviscru apt-cache madison dart
 #Create data-only container:    docker run -v /data --name data busybox echo Data-only container
 #Backup:                        docker run --rm --volumes-from data-staging -v $(pwd)/backups:/backup quay.io/ozzieorca/ubuntu zip -r /backup/daviscru/daviscru-backup.zip /data
 #Restore:                       docker run --rm --volumes-from data-staging -v $(pwd)/backups:/backup quay.io/ozzieorca/ubuntu unzip -o /backup/daviscru/daviscru-backup.zip -d /

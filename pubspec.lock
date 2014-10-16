@@ -164,10 +164,10 @@ packages:
   route_hierarchical:
     description:
       ref: route-with-slashes
-      resolved-ref: "5c38b78a9a2afdb518ef89c521a3d2a55767e629"
-      url: "git://github.com/dgresham/route.dart.git"
+      resolved-ref: "38a6605bc2314c1a9151aac85f72dbbafd949f2b"
+      url: "git://github.com/ozzieorca/route.dart.git"
     source: git
-    version: "0.4.21"
+    version: "0.5.0"
   rsa_pkcs:
     description: rsa_pkcs
     source: hosted

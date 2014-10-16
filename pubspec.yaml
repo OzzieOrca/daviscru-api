@@ -18,7 +18,7 @@ dependencies:
 dependency_overrides:
   route_hierarchical:
     git:
-      url: git://github.com/dgresham/route.dart.git
+      url: git://github.com/ozzieorca/route.dart.git
       ref: route-with-slashes
 transformers:
 - angular
