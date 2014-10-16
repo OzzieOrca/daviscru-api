@@ -1,4 +1,4 @@
-pub run grinder:grind allimport 'package:grinder/grinder.dart';
+import 'package:grinder/grinder.dart';
 import 'package:redstone/tasks.dart';
 
 main(List<String> args) {
