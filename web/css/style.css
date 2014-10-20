@@ -238,6 +238,12 @@ h1 .small, h2 .small{
     font-size: 5em;
     font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
 }
+@-moz-document url-prefix() {
+    .page-message{
+        color: #000;
+        background: none;
+    }
+}
 
 /* Begin Spinners */
 /* From: http://tobiasahlin.com/spinkit/ */

@@ -1,6 +1,6 @@
 .carousel{
     margin-bottom: 20px;
-    margin-top: -1px;
+    margin-top: 0px;
 }
 .carousel-inner > .item > img {
     margin: 0 auto;

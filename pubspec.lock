@@ -164,7 +164,7 @@ packages:
   route_hierarchical:
     description:
       ref: route-with-slashes
-      resolved-ref: "38a6605bc2314c1a9151aac85f72dbbafd949f2b"
+      resolved-ref: "6015a67a623d12fac9b71205dcff5a37c89aee7d"
       url: "git://github.com/ozzieorca/route.dart.git"
     source: git
     version: "0.5.0"
