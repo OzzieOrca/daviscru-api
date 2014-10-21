@@ -96,10 +96,10 @@
 	</div>
 </div>
 <template id="dynamic_button.html" type="text/ng-template">
-	<a href="{{ widget.button.uri }}" type="button" class="btn btn-primary" ng-if="widget.button != null" target="{{ widget.button.target }}">{{ widget.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
+	<a href="{{ widget.button.uri }}" type="button" class="btn btn-primary" ng-show="widget.button != null" target="{{ widget.button.target }}">{{ widget.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
 </template>
 <template id="dynamic_panel_button.html" type="text/ng-template">
-	<a href="{{ panel.button.uri }}" type="button" class="btn btn-primary" ng-if="panel.button != null" target="{{ panel.button.target }}">{{ panel.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
+	<a href="{{ panel.button.uri }}" type="button" class="btn btn-primary" ng-show="panel.button != null" target="{{ panel.button.target }}">{{ panel.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
 </template>
 <div ng-repeat="widget in page.widgets">
 	<div class="container" ng-if="auth.canEdit">

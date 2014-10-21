@@ -5,7 +5,7 @@ class Widget {
   String headingText = "Heading";
   String subHeadingText = "Subheading";
   String bodyText = "Paragraph Text";
-  Map button = new Map<String, String>();
+  Map<String, String> button = new Map<String, String>();
   String alignment = "right";
   bool hasDivider = false;
   List images = new List();
