@@ -95,13 +95,10 @@
 		</div>
 	</div>
 </div>
-<template id="dynamic_button.html" type="text/ng-template">
-	<a href="{{ widget.button.uri }}" type="button" class="btn btn-primary" ng-show="widget.button != null" target="{{ widget.button.target }}">{{ widget.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
-</template>
-<template id="dynamic_panel_button.html" type="text/ng-template">
-	<a href="{{ panel.button.uri }}" type="button" class="btn btn-primary" ng-show="panel.button != null" target="{{ panel.button.target }}">{{ panel.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
-</template>
 <div ng-repeat="widget in page.widgets">
+	<template id="dynamic_button.html" type="text/ng-template">
+		<a href="{{ widget.button.uri }}" type="button" class="btn btn-primary" ng-show="widget.button != null" target="{{ widget.button.target }}">{{ widget.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
+	</template>
 	<div class="container" ng-if="auth.canEdit">
 		<div class="row">
 			<div class="col-md-12">
@@ -202,6 +199,9 @@
 								<div class="caption" ng-if="panel.headingText != null || panel.bodyText != null || panel.button != null">
 									<h3 ng-if="panel.headingText != null">{{ panel.headingText }}</h3>
 									<p ng-if="panel.bodyText != null">{{ panel.bodyText }}</p>
+									<template id="dynamic_panel_button.html" type="text/ng-template">
+										<a href="{{ panel.button.uri }}" type="button" class="btn btn-primary" ng-show="panel.button != null" target="{{ panel.button.target }}">{{ panel.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
+									</template>
 									<p ng-include="dynamic_panel_button.html"></p>
 								</div>
 							</div>
