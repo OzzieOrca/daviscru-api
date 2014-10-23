@@ -196,8 +196,9 @@
 						<div class="col-sm-{{12 ~/ widget.panelContent.length}}" ng-repeat="panel in widget.panelContent">
 							<div class="thumbnail">
 								<img ng-src="{{ panel.image }}">
-								<div class="caption" ng-if="panel.headingText != null || panel.bodyText != null || panel.button != null">
+								<div class="caption" ng-if="panel.headingText != null || panel.subHeadingText != null || panel.bodyText != null || panel.button != null">
 									<h3 ng-if="panel.headingText != null">{{ panel.headingText }}</h3>
+									<h4 ng-if="panel.subHeadingText != null">{{ panel.subHeadingText }}</h4>
 									<p ng-if="panel.bodyText != null">{{ panel.bodyText }}</p>
 									<template id="dynamic_panel_button.html" type="text/ng-template">
 										<a href="{{ panel.button.uri }}" type="button" class="btn btn-primary" ng-show="panel.button != null" target="{{ panel.button.target }}">{{ panel.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>

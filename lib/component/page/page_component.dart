@@ -23,6 +23,7 @@ class PageComponent {
           ..allowElement('A', attributes: ['href','onclick','target'])
           ..allowElement('BUTTON', attributes: ['btn-radio', 'btn-checkbox', 'btn-checkbox-false', 'btn-checkbox-true', 'popover', 'popover-animation', 'popover-placement', 'popover-title', 'popover-trigger', 'tooltip'])
           ..allowElement('DIV', attributes: ['class', 'collapse', 'style'])
+          ..allowElement('SPAN', attributes: ['class', 'style'])
           ..allowElement('FORM', attributes: ['class','role'])
           ..allowElement('I', attributes: ['class','style'])
           ..allowElement('IMG', attributes: ['class','style','src'])
