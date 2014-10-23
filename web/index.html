@@ -11,6 +11,11 @@
 	<link href="/css/carousel.css" rel="stylesheet"  media="screen">
 	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 	<script>
+		window.crypto = window.msCrypto; //Hack for IE 11
+	</script>
+	<script type="application/dart" src="/main.dart"></script>
+	<script type="text/javascript" src="/packages/browser/dart.js"></script>
+	<script>
 		//Google Analytics
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -78,11 +83,6 @@
 		</div>
 	</footer>
 
-	<script>
-		window.crypto = window.msCrypto; //Hack for IE 11
-	</script>
-	<script type="application/dart" src="/main.dart"></script>
-	<script type="text/javascript" src="/packages/browser/dart.js"></script>
 	<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </body>
