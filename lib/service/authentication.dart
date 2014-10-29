@@ -1,11 +1,15 @@
+library auth;
+
+import 'dart:html';
 import 'package:angular/angular.dart';
-import "package:google_oauth2_client/google_oauth2_browser.dart";
+import "package:googleapis_auth/auth_browser.dart";
 import "dart:convert";
 
 @Injectable()
 class Authentication {
   final Http _http;
   GoogleOAuth2 _auth;
+  BrowserOAuth2Flow flow;
   String clientId;
   String scope;
   String token;
@@ -14,7 +18,7 @@ class Authentication {
   String email;
   String profilePicture;
   String role = "anonymous";
-  bool buttonDataLoaded = false;
+  bool googleBtnVisible = false;
   bool signedIn = false;
 
   Authentication(this._http) {
@@ -22,50 +26,72 @@ class Authentication {
       .then((HttpResponse response) {
         clientId = response.data["client_id"];
         scope = response.data["scope"];
-        _auth = new GoogleOAuth2(
-            clientId,
-            [scope],
-            tokenLoaded: oauthReady,
-            tokenNotLoaded: showLoginButton);
+
+        if(window.localStorage.containsKey('accessToken')){
+          hideLoginButton();
+          verifyToken(window.localStorage['accessToken']);
+        }else{
+          createFlow();
+        }
       }).catchError((e) {
         print("Error loading Google+ Signin Button Data");
       });
   }
 
-  oauthReady(Token token){
-    //Verify Token
-    Map dataToVerify = {"access_token": token.data};
+  createFlow(){
+    createImplicitBrowserFlow(new ClientId(clientId, null), scope.split(' ')).then((BrowserOAuth2Flow flow) {
+      this.flow = flow;
+      showLoginButton();
+    });
+  }
+
+  verifyToken(String token){
+    Map dataToVerify = {"access_token": token};
     _http.post('/api/v1/auth/google/login', JSON.encode(dataToVerify))
     .then((HttpResponse response) {
-      Map serverResponse = response.data;
-      if(serverResponse["verified"] == true){
-        this.token = token.data;
+      Map<String, dynamic> serverResponse = response.data;
+      if(serverResponse != null && serverResponse["verified"] == true){
+        this.token = token;
         email = serverResponse["email"];
         role = serverResponse["role"];
         name = serverResponse["name"];
         profilePicture = serverResponse["picture"];
-        buttonDataLoaded = true;
         signedIn = true;
+        showLoginButton();
+        window.localStorage['accessToken'] = token;
+      }else{
+        throw new Exception("Access token not verified");
       }
     }).catchError((e){
-      buttonDataLoaded = true;
+      createFlow();
+      window.localStorage.remove('accessToken');
       print(e);
     });
   }
 
-  void showLoginButton() => buttonDataLoaded = true;
+
 
   void login(){
-    _auth.login();
-    buttonDataLoaded = false;
+    if(flow != null) {
+      hideLoginButton();
+      flow.obtainAccessCredentialsViaUserConsent()
+      .then((AccessCredentials credentials) {
+        verifyToken(credentials.accessToken.data);
+        flow.close();
+      }).catchError((e) => print(e));
+    }
   }
 
   void logout(){
     signedIn = false;
     role = "anonymous";
     token = null;
-    _auth.logout();
+    window.localStorage.remove('accessToken');
+    createFlow();
   }
+
+  void showLoginButton() => googleBtnVisible = true;
+  void hideLoginButton() => googleBtnVisible = false;
 
   bool hasRole(String role) => role == this.role;
 

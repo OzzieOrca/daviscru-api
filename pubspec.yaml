@@ -9,8 +9,7 @@ dependencies:
   http: any
   crypto: any
 
-  google_oauth2_client: ">= 0.4.1"
-  google_plus_v1_api: any
+  googleapis_auth: any
   browser: any
   angular: ">= 1.0.0"
   route_hierarchical: any

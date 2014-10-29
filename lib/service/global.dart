@@ -1,3 +1,5 @@
+library global;
+
 import 'dart:js';
 import 'package:angular/angular.dart';
 

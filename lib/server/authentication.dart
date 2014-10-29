@@ -58,7 +58,7 @@ class Authentication{
 
   static googleAuthVerifyUser(token, [bool update = false]){
     return http.get("https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${token}")
-    .then((Response googleResponseJSON){
+    .then((googleResponseJSON){
       Map googleResponse = JSON.decode(googleResponseJSON.body);
       if(googleResponse["error"] != null){
         return new shelf.Response(400, body: "${googleResponse["error"]}: ${googleResponse["error_description"]}");
@@ -86,7 +86,7 @@ class Authentication{
         return user;
       }else{
         return http.get("https://www.googleapis.com/oauth2/v1/userinfo?access_token=${token}")
-        .then((Response googleResponseJSON){
+        .then((googleResponseJSON){
           Map googleResponse = JSON.decode(googleResponseJSON.body);
           if(user == null){
             mongoDb.insert("users", {"role": "user", "userId": userId, "email": googleResponse["email"], "name": googleResponse["name"], "picture": googleResponse["picture"]});
