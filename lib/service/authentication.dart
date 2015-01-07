@@ -11,6 +11,7 @@ class Authentication {
   BrowserOAuth2Flow flow;
   String clientId;
   String scope;
+  String token;
 
   String name;
   String email;
@@ -49,6 +50,7 @@ class Authentication {
     .then((HttpResponse response) {
       Map<String, dynamic> serverResponse = response.data;
       if(serverResponse != null && serverResponse["verified"] == true){
+        this.token = token;
         email = serverResponse["email"];
         role = serverResponse["role"];
         name = serverResponse["name"];
@@ -82,6 +84,7 @@ class Authentication {
   void logout(){
     signedIn = false;
     role = "anonymous";
+    token = null;
     window.localStorage.remove('accessToken');
     createFlow();
   }

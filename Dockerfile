@@ -38,7 +38,7 @@ CMD /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
 #Run terminal inside server:    docker run --rm --volumes-from data -i -t -p 80:80 quay.io/ozzieorca/daviscru /bin/bash
 #Get Dart Package Versions:     docker run --rm -i -t quay.io/ozzieorca/daviscru apt-cache madison dart
 #Create data-only container:    docker run -v /data --name data busybox echo Data-only container
-#Backup:                        docker run --rm --volumes-from data-staging -v $(pwd)/backups:/backup quay.io/ozzieorca/ubuntu zip -r /backup/daviscru/daviscru-backup.zip /data
-#Restore:                       docker run --rm --volumes-from data-staging -v $(pwd)/backups:/backup quay.io/ozzieorca/ubuntu unzip -o /backup/daviscru/daviscru-backup.zip -d /
+#Backup:                        docker run --rm --volumes-from data-staging -v $(pwd)/backups:/backup quay.io/ozzieorca/ubuntu /bin/bash -c 'cd /data/daviscru/images/uploads && zip -r /backup/daviscru-backup-uploads.zip .'
+#Restore:                       docker run --rm --volumes-from data-staging -v $(pwd)/backups:/backup quay.io/ozzieorca/ubuntu /bin/bash -c 'cd /data/daviscru/images/uploads && unzip -o /backup/daviscru-backup-uploads.zip'
 #Backup MongoDB                 docker run --rm --link mongodb-dev:mongodb -v $(pwd)/backups/db:/backup quay.io/ozzieorca/mongodb mongodump --host mongodb --out /backup  --db daviscru
 #Restore MongoDB                docker run --rm --link mongodb-staging:mongodb -v $(pwd)/backups/db:/backup quay.io/ozzieorca/mongodb mongorestore --drop --host mongodb /backup

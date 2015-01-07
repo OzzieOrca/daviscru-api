@@ -12,12 +12,13 @@ dependencies:
   googleapis_auth: any
   browser: any
   angular: ">= 1.0.0"
-  route_hierarchical: any
+
   path: any
 dependency_overrides:
-  route_hierarchical:
-    git:
-      url: git://github.com/ozzieorca/route.dart.git
-      ref: route-with-slashes
+  route_hierarchical: ">= 0.6.1"
+#  route_hierarchical:
+#    git:
+#      url: git://github.com/ozzieorca/route.dart.git
+#      ref: route-with-slashes
 transformers:
 - angular

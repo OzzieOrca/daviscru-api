@@ -56,11 +56,11 @@ packages:
   googleapis_auth:
     description: googleapis_auth
     source: hosted
-    version: "0.1.1"
+    version: "0.2.1"
   grinder:
     description: grinder
     source: hosted
-    version: "0.6.1"
+    version: "0.6.2"
   html5lib:
     description: html5lib
     source: hosted
@@ -76,7 +76,7 @@ packages:
   intl:
     description: intl
     source: hosted
-    version: "0.11.9"
+    version: "0.11.10"
   logging:
     description: logging
     source: hosted
@@ -116,7 +116,7 @@ packages:
   petitparser:
     description: petitparser
     source: hosted
-    version: "1.2.2"
+    version: "1.3.0"
   pool:
     description: pool
     source: hosted
@@ -124,7 +124,7 @@ packages:
   quiver:
     description: quiver
     source: hosted
-    version: "0.18.2"
+    version: "0.19.0+1"
   redstone:
     description: redstone
     source: hosted
@@ -136,14 +136,11 @@ packages:
   redstone_mapper_mongo:
     description: redstone_mapper_mongo
     source: hosted
-    version: "0.1.1+1"
+    version: "0.1.2"
   route_hierarchical:
-    description:
-      ref: route-with-slashes
-      resolved-ref: "6015a67a623d12fac9b71205dcff5a37c89aee7d"
-      url: "git://github.com/ozzieorca/route.dart.git"
-    source: git
-    version: "0.5.0"
+    description: route_hierarchical
+    source: hosted
+    version: "0.6.1"
   shelf:
     description: shelf
     source: hosted
@@ -171,11 +168,11 @@ packages:
   string_scanner:
     description: string_scanner
     source: hosted
-    version: "0.1.1"
+    version: "0.1.2"
   unittest:
     description: unittest
     source: hosted
-    version: "0.11.0+5"
+    version: "0.11.1"
   utf:
     description: utf
     source: hosted
