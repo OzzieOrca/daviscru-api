@@ -11,7 +11,6 @@ class Widget {
   List images = new List();
   List panelContent = new List<Map>();
   String videoUrl = "https://youtube.com/watch?v=2R_u1XPdJWA";
-  int _order; // Location in widgets array
 
   Widget(this.widgetType);
 
@@ -31,13 +30,10 @@ class Widget {
     videoUrl = json['videoUrl'];
   }
 
-  void swapAlignment() => alignment == "left" ? alignment = "right" : alignment = "left";
-  void toggleDivider() => hasDivider = !hasDivider;
-
-  //TODO: Fix: Hack to allow storing of order from outer ng-repeat over widgets
-  int get order => _order;
-  void set order(order) => _order = order;
-  void setOrder(int newOrder){
-    _order = newOrder;
+  void swapAlignment() {
+    alignment == "left" ? alignment = "right" : alignment = "left";
+  }
+  void toggleDivider() {
+    hasDivider = !hasDivider;
   }
 }

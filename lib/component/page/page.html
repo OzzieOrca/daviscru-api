@@ -146,10 +146,10 @@
 				</div>
 			</div>
 			<!-- Carousel -->
-			<div id="carousel-{{ $index }}" class="carousel slide hidden-xs" data-ride="carousel" ng-switch-when="carousel" ng-show="widget.setOrder($index) || true">
+			<div id="carousel-{{ $index }}" class="carousel slide hidden-xs" data-ride="carousel" ng-switch-when="carousel">
 				<!-- Indicators -->
 				<ol class="carousel-indicators">
-					<li data-target="#carousel-{{ widget.order }}" data-slide-to="{{ $index }}" ng-class="{'active': $first}"  ng-repeat="panel in widget.panelContent"></li>
+					<li data-target="#carousel-{{ $parent.$index }}" data-slide-to="{{ $index }}" ng-class="{'active': $first}"  ng-repeat="panel in widget.panelContent"></li>
 				</ol>
 
 				<!-- Wrapper for slides -->

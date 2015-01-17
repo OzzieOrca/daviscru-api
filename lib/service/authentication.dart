@@ -89,8 +89,12 @@ class Authentication {
     createFlow();
   }
 
-  void showLoginButton() => googleBtnVisible = true;
-  void hideLoginButton() => googleBtnVisible = false;
+  void showLoginButton(){
+    googleBtnVisible = true;
+  }
+  void hideLoginButton(){
+    googleBtnVisible = false;
+  }
 
   bool hasRole(String role) => role == this.role;
 

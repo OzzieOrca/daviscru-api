@@ -11,11 +11,12 @@ dependencies:
 
   googleapis_auth: any
   browser: any
-  angular: ">= 1.0.0"
+  angular: ">= 1.1.0"
 
   path: any
 dependency_overrides:
   route_hierarchical: ">= 0.6.1"
+###route_hierarchical needs to be at least 0.6.0 to include the route-with-slashes feature
 #  route_hierarchical:
 #    git:
 #      url: git://github.com/ozzieorca/route.dart.git
