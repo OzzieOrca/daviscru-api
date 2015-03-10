@@ -1,7 +1,7 @@
 name: daviscru
 version: 0.0.1
 dependencies:
-  redstone: ">= 0.5.18"
+  redstone: ">= 0.5.21"
   redstone_mapper_mongo: any
   grinder: any
   shelf_static: any
@@ -14,12 +14,5 @@ dependencies:
   angular: ">= 1.1.0"
 
   path: any
-dependency_overrides:
-  route_hierarchical: ">= 0.6.1"
-###route_hierarchical needs to be at least 0.6.0 to include the route-with-slashes feature
-#  route_hierarchical:
-#    git:
-#      url: git://github.com/ozzieorca/route.dart.git
-#      ref: route-with-slashes
 transformers:
 - angular
