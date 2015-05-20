@@ -7,7 +7,7 @@ class StatsRepository {
 
   StatsRepository(this._http, this.auth);
 
-  Future<List<Stat>> getStats(){
+  /*Future<List<Stat>> */getStats(){
     Map postData = {"access_token": auth.token};
     return _http.post('/api/v1/tools/stats', JSON.encode(postData))
       .then((HttpResponse response) {
