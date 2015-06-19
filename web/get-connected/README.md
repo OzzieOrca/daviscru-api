@@ -1,2 +1,0 @@
-This folder is needed so that `pub get` will symlink a `packages` folder here for use with the subpages of `get-connected`.
-There should be a better way of doing this by specifying the root package folder in Angular.

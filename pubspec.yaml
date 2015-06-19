@@ -1,18 +1,9 @@
-name: daviscru
+name: daviscru_api
 version: 0.0.1
 dependencies:
-  redstone: ">= 0.5.21"
+  redstone: "^0.5.21"
   redstone_mapper_mongo: any
   grinder: any
-  shelf_static: any
   dart_config: any
   http: any
   crypto: any
-
-  googleapis_auth: any
-  browser: any
-  angular: ">= 1.1.0"
-
-  path: any
-transformers:
-- angular

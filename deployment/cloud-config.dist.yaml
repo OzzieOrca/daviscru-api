@@ -1,0 +1,140 @@
+#cloud-config
+
+coreos:
+  etcd2:
+    # generate a new token for each unique cluster from https://discovery.etcd.io/new?size=1
+    discovery: https://discovery.etcd.io/<token>
+    # multi-region and multi-cloud deployments need to use $public_ipv4
+    advertise-client-urls: http://$public_ipv4:2379
+    initial-advertise-peer-urls: http://$private_ipv4:2380
+    # listen on both the official ports and the legacy ports
+    # legacy ports can be omitted if your application doesn't depend on them
+    listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
+    listen-peer-urls: http://$private_ipv4:2380,http://$private_ipv4:7001
+  fleet:
+    public-ip: $public_ipv4   # used for fleetctl ssh command
+  units:
+    - name: etcd2.service
+      command: start
+    - name: fleet.service
+      command: start
+    - name: iptables-restore.service
+      enable: true
+    - name: swap.service
+      command: start
+      content: |
+        [Unit]
+        Description=Turn on swap
+
+        [Service]
+        User=root
+        Type=oneshot
+        Environment="SWAPFILE=/2GiB.swap"
+        RemainAfterExit=true
+        ExecStartPre=/usr/bin/sh -c "/usr/bin/touch ${SWAPFILE} && /usr/bin/chattr +C ${SWAPFILE} && /usr/bin/fallocate -l 2048m ${SWAPFILE} && /usr/bin/chmod 600 ${SWAPFILE} && /usr/sbin/mkswap ${SWAPFILE} && /usr/sbin/losetup -f ${SWAPFILE}"
+        ExecStart=/usr/bin/sh -c "/sbin/swapon $(/usr/sbin/losetup -j ${SWAPFILE} | /usr/bin/cut -d : -f 1)"
+        ExecStop=/usr/bin/sh -c "/sbin/swapoff $(/usr/sbin/losetup -j ${SWAPFILE} | /usr/bin/cut -d : -f 1)"
+        ExecStopPost=/usr/bin/sh -c "/usr/sbin/losetup -d $(/usr/sbin/losetup -j ${SWAPFILE} | /usr/bin/cut -d : -f 1)"
+
+        [Install]
+        WantedBy=multi-user.target
+    - name: init-etcd-secret-keys.service
+      command: start
+      content: |
+        [Unit]
+        Description=Initialize etcd secret keys
+
+        [Service]
+        User=core
+        Type=oneshot
+        RemainAfterExit=true
+        ExecStart=/usr/bin/sh -c "etcdctl set /datadog/apikey <key> ; etcdctl set /logentries/token <token>"
+
+        [Install]
+        WantedBy=multi-user.target
+    - name: datadog.service
+      command: start
+      content: |
+        [Unit]
+        Description=Datadog Monitoring Service
+        After=docker.service
+
+        [Service]
+        User=core
+        TimeoutStartSec=0
+        KillMode=none
+        ExecStartPre=-/usr/bin/docker kill dd-agent
+        ExecStartPre=-/usr/bin/docker rm dd-agent
+        ExecStartPre=/usr/bin/docker pull quay.io/ozzieorca/datadog
+        ExecStart=/usr/bin/bash -c "/usr/bin/docker run --privileged --name dd-agent -h `hostname` -v /var/run/docker.sock:/var/run/docker.sock -v /proc/mounts:/host/proc/mounts:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e API_KEY=`etcdctl get /datadog/apikey` quay.io/ozzieorca/datadog"
+
+        [X-Fleet]
+        Global=true
+    - name: logentries.service
+      command: start
+      runtime: no
+      content: |
+        [Unit]
+        Description=Push journal logs to logentries.com
+        After=systemd-journald.service
+        After=systemd-networkd.service
+
+        [Service]
+        Restart=always
+        ExecStart=/bin/bash /home/core/journal2logentries.sh
+
+        [Install]
+        WantedBy=multi-user.target
+
+write_files:
+  - path: /var/lib/iptables/rules-save
+    permissions: 0644
+    owner: root:root
+    content: |
+      *filter
+      :INPUT DROP [0:0]
+      :FORWARD DROP [0:0]
+      :OUTPUT ACCEPT [0:0]
+      -A INPUT -i lo -j ACCEPT
+      -A INPUT -i eth1 -j ACCEPT
+      -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+      -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
+      -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+      -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+      -A INPUT -p icmp -m icmp --icmp-type 0 -j ACCEPT
+      -A INPUT -p icmp -m icmp --icmp-type 3 -j ACCEPT
+      -A INPUT -p icmp -m icmp --icmp-type 11 -j ACCEPT
+      COMMIT
+
+  - path: /home/core/.dockercfg
+    owner: core:core
+    permissions: 0644
+    content: |
+      {
+        "quay.io": {
+          "auth": "<generate encrypted password>",
+          "email": "ozzieorca@gmail.com"
+        }
+      }
+  - path: /home/core/journal2logentries.sh
+      permissions: '0744'
+      owner: root:root
+      content: |
+        #!/bin/bash
+        # CoreOS on DigitalOcean: push systemd journal logs to logentries.com
+        # get your private token from logentries.com, see https://logentries.com/doc/input-token
+
+        # token in etcd?
+        token=$(etcdctl get /logentries/token)
+        if [[ ! $token ]]; then
+          # we have a problem!
+          exit 10
+        fi
+        journalctl -o short -f | awk -v token=$token '{ print token, $0; fflush(); }' | ncat --ssl --ssl-verify data.logentries.com 20000
+
+        # should you have problems verifying SSL certificates, here are all certificates from logentries.com
+        # https://logentries.com/doc/certificates
+        # no ssl required?
+        # journalctl -o short -f | awk -v token=$token '{ print token, $0; fflush(); }' | ncat data.logentries.com 10000
+
+#sudo /usr/bin/coreos-cloudinit --from-file /path/to/user-data

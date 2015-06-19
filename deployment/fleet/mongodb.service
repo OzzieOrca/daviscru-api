@@ -7,7 +7,6 @@ Requires=data.service
 
 [Service]
 User=core
-EnvironmentFile=/etc/environment
 TimeoutStartSec=0
 Restart=always
 KillMode=none

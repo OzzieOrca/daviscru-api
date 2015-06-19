@@ -5,7 +5,6 @@ After=docker.service
 
 [Service]
 User=core
-EnvironmentFile=/etc/environment
 RemainAfterExit=yes
 TimeoutStartSec=0
 KillMode=none

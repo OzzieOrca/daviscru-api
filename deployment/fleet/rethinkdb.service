@@ -1,0 +1,17 @@
+[Unit]
+Description=RethinkDB container
+After=etcd.service
+After=docker.service
+After=data.service
+Requires=data.service
+
+[Service]
+User=core
+TimeoutStartSec=0
+Restart=always
+KillMode=none
+ExecStartPre=/usr/bin/docker pull rethinkdb
+ExecStartPre=-/usr/bin/docker kill rethinkdb
+ExecStartPre=-/usr/bin/docker rm rethinkdb
+ExecStart=/usr/bin/docker run --rm  -p 8080:8080 -p 28015:28015 -p 29015:29015 --volumes-from data --name rethinkdb rethinkdb
+ExecStop=/usr/bin/docker stop rethinkdb
